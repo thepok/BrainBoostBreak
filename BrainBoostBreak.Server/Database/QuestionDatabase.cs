@@ -24,7 +24,7 @@ namespace BrainBoostBreak.Server
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("User ID = Datenbankbenutzer; Password = Datenbankbenutzerpasswort; Server = 127.0.0.1; Port = 5432; Database = DatenbankName; Pooling = true;", opt => opt.CommandTimeout(300));
+            optionsBuilder.UseNpgsql("User ID = BrainBoostBreak; Password = BrainBoostPW; Server = 127.0.0.1; Port = 5432; Database = BrainBoostBreak; Pooling = true;", opt => opt.CommandTimeout(300));
         }
     }
     public class Question
@@ -36,6 +36,9 @@ namespace BrainBoostBreak.Server
 
         public string Answer { get; set; }
 
-
+        internal QuestionTO ToTO()
+        {
+            return new QuestionTO() { Text = Text, Answer = Answer };
+        }
     }
 }

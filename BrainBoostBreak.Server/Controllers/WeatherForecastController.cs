@@ -27,6 +27,13 @@ namespace BrainBoostBreak.Server.Controllers
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
+            QuestionDatabase db = new QuestionDatabase();
+
+            db.Questions.Add(new Question() { Answer = "5", Text = "Was ist 3 + 2" });
+
+            //TODO Read Data and send it over API 
+            //db.Questions.First() ...
+
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {

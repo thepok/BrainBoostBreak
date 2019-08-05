@@ -22,13 +22,7 @@ namespace BrainBoostBreak.Server.Controllers
         [HttpGet]
         public QuestionTO Get()
         {
-            QuestionDatabase db = new QuestionDatabase();
-            if (db.Questions.Count() == 0)
-            {
-                db.Questions.Add(new Question() { Answer = "5", Text = "Was ist 3 + 2" });
-                db.SaveChanges();
-            }
-            return db.Questions.First().ToTO();
+            return ProcedualQuestionGenerator.GenQuestion();
         }
     }
 }

@@ -16,6 +16,10 @@ namespace BrainBoostBreak.Server
 
         public DbSet<Question> Questions { get; set; }
 
+        public DbSet<Topic> Topics { get; set; }
+
+        public DbSet<Answer> Answers { get; set;}
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
@@ -32,13 +36,30 @@ namespace BrainBoostBreak.Server
         //Classname+"Id" at end is automatic primary Key
         public int QuestionId { get; set; }
 
+        [Required]
+        public Topic Topic {get; set;}
+
+        [Required]
         public string Text { get; set; }
 
-        public string Answer { get; set; }
+        [Required]
+        public Answer Answer { get; set; }
 
-        internal QuestionTO ToTO()
-        {
-            return new QuestionTO() { Text = Text, Answer = Answer };
-        }
+    }
+
+    public class Answer
+    {
+        public int AnswerId { get; set; }
+
+        [Required]
+        public string Text { get; set; }
+    }
+
+    public class Topic
+    {
+        public int TopicId {get; set;}
+
+        [Required]
+        public string Name;
     }
 }

@@ -2,15 +2,17 @@
 using BrainBoostBreak.Server;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace BrainBoostBreak.Server.Migrations
 {
     [DbContext(typeof(QuestionDatabase))]
-    partial class QuestionDatabaseModelSnapshot : ModelSnapshot
+    [Migration("20190805190548_AddTopics")]
+    partial class AddTopics
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,7 +40,8 @@ namespace BrainBoostBreak.Server.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
 
-                    b.Property<int>("AnswerId");
+                    b.Property<string>("Answer")
+                        .IsRequired();
 
                     b.Property<string>("Text")
                         .IsRequired();
@@ -46,8 +49,6 @@ namespace BrainBoostBreak.Server.Migrations
                     b.Property<int>("TopicId");
 
                     b.HasKey("QuestionId");
-
-                    b.HasIndex("AnswerId");
 
                     b.HasIndex("TopicId");
 
@@ -67,12 +68,6 @@ namespace BrainBoostBreak.Server.Migrations
 
             modelBuilder.Entity("BrainBoostBreak.Server.Question", b =>
                 {
-                    b.HasOne("BrainBoostBreak.Server.Answer", "Answer")
-                        .WithMany()
-                        .HasForeignKey("AnswerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("BrainBoostBreak.Server.Topic", "Topic")
                         .WithMany()
                         .HasForeignKey("TopicId")

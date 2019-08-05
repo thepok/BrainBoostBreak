@@ -2,9 +2,17 @@
 @using BrainBoostBreak.Shared
 @inject HttpClient Http
 
-<h1>Weather forecast</h1>
 
-<p>This component demonstrates fetching data from the server.</p>
+@if (Result != null)
+{
+    <h1>Letze Frage:</h1>
+
+    @Result.Text
+
+}
+<br />
+
+<h1>Nächste Frage</h1>
 
 @if (Question == null)
 {
@@ -14,14 +22,35 @@ else
 {
     @Question.Text
     <br />
-    @Question.Answer
+    <br />
+    foreach (var answer in Question.Answers)
+    {
+        <button @onclick="@(()=>GetNext(Question.Id, answer.Id))">@answer.Text</button>
+        <br />
+    }
 }
 
 @code {
     QuestionTO Question;
 
+    ResultTO Result;
+
+    [Parameter]
+    public int QuestionId { get; set; }
+
+    [Parameter]
+    public int AnswerId { get; set; }
+
     protected override async Task OnInitAsync()
     {
         Question = await Http.GetJsonAsync<QuestionTO>("Question");
+        StateHasChanged();
+    }
+
+    public async void GetNext(int questionId, int answerId)
+    {
+        Question = await Http.GetJsonAsync<QuestionTO>("Question");
+        Result = await Http.GetJsonAsync<ResultTO>(@"Result\"+questionId+@"\"+answerId);
+        StateHasChanged();
     }
 }

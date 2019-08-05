@@ -4,13 +4,9 @@ using System.Text;
 
 namespace BrainBoostBreak.Shared
 {
-    public class QuestionTO
+    public class ResultTO
     {
         public string Text { get; set; }
-
-        public int Id { get; set; }
-
-        public AnswerTO[] Answers { get; set; }
 
     }
 }

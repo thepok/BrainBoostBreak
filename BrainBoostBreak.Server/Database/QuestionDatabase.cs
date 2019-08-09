@@ -18,10 +18,24 @@ namespace BrainBoostBreak.Server
 
         public DbSet<Topic> Topics { get; set; }
 
-        public DbSet<Answer> Answers { get; set;}
+        public DbSet<Answer> Answers { get; set; }
+
+        public DbSet<Link> Links { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            var topicZitate = new Topic() { TopicId = 1, Name = "Zitate" };
+
+            var a1 = new Answer() { AnswerId = 1, Text = "abc" };
+            var a2 = new Answer() { AnswerId = 2, Text = "abcd" };
+            var a3 = new Answer() { AnswerId = 3, Text = "abce" };
+            var a4 = new Answer() { AnswerId = 4, Text = "abcf" };
+
+            modelBuilder.Entity<Topic>().HasData(topicZitate);
+
+            modelBuilder.Entity<Answer>().HasData(a1, a2, a3, a4);
+
+            modelBuilder.Entity<Question>().HasData(new Question() { QuestionId = 1, Answer = a1, Text = "asdf", Topic = topicZitate });
 
             base.OnModelCreating(modelBuilder);
         }
@@ -37,7 +51,7 @@ namespace BrainBoostBreak.Server
         public int QuestionId { get; set; }
 
         [Required]
-        public Topic Topic {get; set;}
+        public Topic Topic { get; set; }
 
         [Required]
         public string Text { get; set; }
@@ -57,9 +71,29 @@ namespace BrainBoostBreak.Server
 
     public class Topic
     {
-        public int TopicId {get; set;}
+        public int TopicId { get; set; }
 
         [Required]
         public string Name;
+    }
+
+    public enum ObjectTypeEnum
+    {
+        Answer = 1,
+        Question = 0
+    }
+
+    public class Link
+    {
+        public int LinkId { get; set; }
+
+        [Required]
+        public int ObjectId { get; set; }
+
+        [Required]
+        public ObjectTypeEnum ObjectType { get; set; }
+
+        [Required]
+        public string Url { get; set; }
     }
 }

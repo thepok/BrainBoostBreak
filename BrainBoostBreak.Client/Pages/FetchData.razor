@@ -33,6 +33,8 @@ else
 @code {
     QuestionTO Question;
 
+    QuestionTO NextQuestion;
+
     ResultTO Result;
 
     [Parameter]
@@ -45,12 +47,25 @@ else
     {
         Question = await Http.GetJsonAsync<QuestionTO>("Question");
         StateHasChanged();
+        NextQuestion = await Http.GetJsonAsync<QuestionTO>("Question");
+        NextQuestion.Text += new Random().Next();
+
     }
 
     public async void GetNext(int questionId, int answerId)
     {
-        Question = await Http.GetJsonAsync<QuestionTO>("Question");
+
+        Question = NextQuestion;
+        NextQuestion = null;
+        var NextQuestionTask=Http.GetJsonAsync<QuestionTO>("Question");
         Result = await Http.GetJsonAsync<ResultTO>(@"Result\"+questionId+@"\"+answerId);
         StateHasChanged();
+        NextQuestion = await NextQuestionTask;
+        if(Question==null)
+        {
+            Question = NextQuestion;
+            StateHasChanged();
+        }
+        NextQuestion.Text += new Random().Next();
     }
 }

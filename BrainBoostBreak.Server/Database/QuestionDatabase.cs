@@ -23,18 +23,19 @@ namespace BrainBoostBreak.Server
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //var topicZitate = new Topic() { TopicID = 1, Name = "Zitate" };
+            //Use negative PrimaryKeys to avoid conflicts with Database Sequenze generated Keys
+            var topicZitate = new Topic() { TopicId = -1, Name = "Zitate" };
 
-            //var a1 = new Answer() { AnswerID = 1, Text = "abc" };
-            //var a2 = new Answer() { AnswerID = 2, Text = "abcd" };
-            //var a3 = new Answer() { AnswerID = 3, Text = "abce" };
-            //var a4 = new Answer() { AnswerID = 4, Text = "abcf" };
+            var a1 = new Answer() { AnswerId = -1, Text = "abc" };
+            var a2 = new Answer() { AnswerId = -2, Text = "abcd" };
+            var a3 = new Answer() { AnswerId = -3, Text = "abce" };
+            var a4 = new Answer() { AnswerId = -4, Text = "abcf" };
 
-            //modelBuilder.Entity<Topic>().HasData(topicZitate);
+            modelBuilder.Entity<Topic>().HasData(topicZitate);
 
-            //modelBuilder.Entity<Answer>().HasData(a1, a2, a3, a4);
+            modelBuilder.Entity<Answer>().HasData(a1, a2, a3, a4);
 
-            //modelBuilder.Entity<Question>().HasData(new Question() { QuestionID = 1, AnswerID = a1, Text = "asdf", TopicID = topicZitate });
+            modelBuilder.Entity<Question>().HasData(new Question() { QuestionId = -1, AnswerId = a1.AnswerId, Text = "bla bla?", TopicId = topicZitate.TopicId });
 
             base.OnModelCreating(modelBuilder);
         }
@@ -66,11 +67,15 @@ namespace BrainBoostBreak.Server
         //Classname+"Id" at end is automatic primary Key
         public int QuestionId { get; set; }
 
+        public int TopicId { get; set; }
+
         [Required]
         public Topic Topic { get; set; }
 
         [Required]
         public string Text { get; set; }
+
+        public int AnswerId { get; set; }
 
         [Required]
         public Answer Answer { get; set; }

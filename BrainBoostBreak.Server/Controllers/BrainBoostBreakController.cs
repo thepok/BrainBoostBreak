@@ -22,6 +22,11 @@ namespace BrainBoostBreak.Server.Controllers
         [HttpGet]
         public QuestionTO Get()
         {
+
+#if DEBUG
+            //Delay to Keep design
+            System.Threading.Thread.Sleep(3000);
+#endif
             return ProcedualQuestionGenerator.GenQuestion();
         }
     }

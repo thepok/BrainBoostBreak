@@ -15,14 +15,13 @@ namespace BrainBoostBreak.Server.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
-                .HasAnnotation("ProductVersion", "3.0.0-preview7.19362.6")
+                .HasAnnotation("ProductVersion", "3.0.0-preview5.19227.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             modelBuilder.Entity("BrainBoostBreak.Server.Answer", b =>
                 {
                     b.Property<int>("AnswerId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Text")
                         .IsRequired();
@@ -30,13 +29,34 @@ namespace BrainBoostBreak.Server.Migrations
                     b.HasKey("AnswerId");
 
                     b.ToTable("Answers");
+
+                    b.HasData(
+                        new
+                        {
+                            AnswerId = -1,
+                            Text = "abc"
+                        },
+                        new
+                        {
+                            AnswerId = -2,
+                            Text = "abcd"
+                        },
+                        new
+                        {
+                            AnswerId = -3,
+                            Text = "abce"
+                        },
+                        new
+                        {
+                            AnswerId = -4,
+                            Text = "abcf"
+                        });
                 });
 
             modelBuilder.Entity("BrainBoostBreak.Server.Link", b =>
                 {
                     b.Property<int>("LinkId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("ObjectId");
 
@@ -53,8 +73,7 @@ namespace BrainBoostBreak.Server.Migrations
             modelBuilder.Entity("BrainBoostBreak.Server.Question", b =>
                 {
                     b.Property<int>("QuestionId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("AnswerId");
 
@@ -70,17 +89,31 @@ namespace BrainBoostBreak.Server.Migrations
                     b.HasIndex("TopicId");
 
                     b.ToTable("Questions");
+
+                    b.HasData(
+                        new
+                        {
+                            QuestionId = -1,
+                            AnswerId = -1,
+                            Text = "bla bla?",
+                            TopicId = -1
+                        });
                 });
 
             modelBuilder.Entity("BrainBoostBreak.Server.Topic", b =>
                 {
                     b.Property<int>("TopicId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.HasKey("TopicId");
 
                     b.ToTable("Topics");
+
+                    b.HasData(
+                        new
+                        {
+                            TopicId = -1
+                        });
                 });
 
             modelBuilder.Entity("BrainBoostBreak.Server.Question", b =>

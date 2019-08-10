@@ -3,7 +3,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace BrainBoostBreak.Server.Migrations
 {
-    public partial class Initial : Migration
+    public partial class try1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,7 +14,6 @@ namespace BrainBoostBreak.Server.Migrations
                     AnswerId = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     Text = table.Column<string>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None)
                 },
                 constraints: table =>
                 {
@@ -27,12 +26,9 @@ namespace BrainBoostBreak.Server.Migrations
                 {
                     LinkId = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
-                    ObjectId = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None),
-                    ObjectType = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None),
+                    ObjectId = table.Column<int>(nullable: false),
+                    ObjectType = table.Column<int>(nullable: false),
                     Url = table.Column<string>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None)
                 },
                 constraints: table =>
                 {
@@ -57,12 +53,9 @@ namespace BrainBoostBreak.Server.Migrations
                 {
                     QuestionId = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
-                    TopicId = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None),
-                    Text = table.Column<string>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None),
+                    TopicId = table.Column<int>(nullable: false),
+                    Text = table.Column<string>(nullable: false),
                     AnswerId = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None)
                 },
                 constraints: table =>
                 {
@@ -80,6 +73,27 @@ namespace BrainBoostBreak.Server.Migrations
                         principalColumn: "TopicId",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Answers",
+                columns: new[] { "AnswerId", "Text" },
+                values: new object[,]
+                {
+                    { -1, "abc" },
+                    { -2, "abcd" },
+                    { -3, "abce" },
+                    { -4, "abcf" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Topics",
+                column: "TopicId",
+                value: -1);
+
+            migrationBuilder.InsertData(
+                table: "Questions",
+                columns: new[] { "QuestionId", "AnswerId", "Text", "TopicId" },
+                values: new object[] { -1, -1, "bla bla?", -1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Questions_AnswerId",

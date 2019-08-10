@@ -23,12 +23,19 @@ namespace BrainBoostBreak.Server.Controllers
         public ResultTO Get(int  QuestionId, int AnswerId)
         {
             //Datenbank abfragen
-            if ((QuestionId == 1 && AnswerId == 4) || (QuestionId == 2 && AnswerId == 2))
+
+            using (QuestionDatabase db = new QuestionDatabase())
             {
-                return new ResultTO() { Text = "Right" };
+                var question = db.Questions.Single(q => q.QuestionId == QuestionId);
+                Console.WriteLine("Question was  " + question.Text);
+                if (question.AnswerId == AnswerId)
+                    return new ResultTO() { Text = "Richtig!" };
+                else
+                {
+                    var answer = db.Answers.Single(a => a.AnswerId == question.AnswerId);
+                    return new ResultTO() { Text = "Falsch! Richtig wäre " + answer.Text };
+                }
             }
-            else
-                return new ResultTO() { Text = "False" };
         }
     }
 }

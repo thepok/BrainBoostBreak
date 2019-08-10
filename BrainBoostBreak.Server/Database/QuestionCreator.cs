@@ -19,7 +19,7 @@ namespace BrainBoostBreak.Server.Database
 
             modelBuilder.Entity<Answer>().HasData(answerList);
 
-            modelBuilder.Entity<Question>().HasData(new Question() { QuestionId = QuestionDatabase.QuestionId++, Answer = answerList.FirstOrDefault(), Text = question, Topic = topic }); ;
+            modelBuilder.Entity<Question>().HasData(new Question() { QuestionId = QuestionDatabase.QuestionId++, AnswerId = answerList.FirstOrDefault().AnswerId, Text = question, TopicId = topic.TopicId }); ;
         }
 
         public static void Create(ModelBuilder modelBuilder, Topic topic, string question, params Answer[] answers)

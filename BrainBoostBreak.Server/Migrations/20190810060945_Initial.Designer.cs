@@ -9,8 +9,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BrainBoostBreak.Server.Migrations
 {
     [DbContext(typeof(QuestionDatabase))]
-    [Migration("20190805192146_FixQuestion")]
-    partial class FixQuestion
+    [Migration("20190810060945_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,6 +32,24 @@ namespace BrainBoostBreak.Server.Migrations
                     b.HasKey("AnswerId");
 
                     b.ToTable("Answers");
+                });
+
+            modelBuilder.Entity("BrainBoostBreak.Server.Link", b =>
+                {
+                    b.Property<int>("LinkId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+
+                    b.Property<int>("ObjectId");
+
+                    b.Property<int>("ObjectType");
+
+                    b.Property<string>("Url")
+                        .IsRequired();
+
+                    b.HasKey("LinkId");
+
+                    b.ToTable("Links");
                 });
 
             modelBuilder.Entity("BrainBoostBreak.Server.Question", b =>

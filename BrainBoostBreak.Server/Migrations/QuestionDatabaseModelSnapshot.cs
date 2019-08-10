@@ -32,6 +32,24 @@ namespace BrainBoostBreak.Server.Migrations
                     b.ToTable("Answers");
                 });
 
+            modelBuilder.Entity("BrainBoostBreak.Server.Link", b =>
+                {
+                    b.Property<int>("LinkId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn);
+
+                    b.Property<int>("ObjectId");
+
+                    b.Property<int>("ObjectType");
+
+                    b.Property<string>("Url")
+                        .IsRequired();
+
+                    b.HasKey("LinkId");
+
+                    b.ToTable("Links");
+                });
+
             modelBuilder.Entity("BrainBoostBreak.Server.Question", b =>
                 {
                     b.Property<int>("QuestionId")

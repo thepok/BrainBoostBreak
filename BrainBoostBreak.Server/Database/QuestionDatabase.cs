@@ -13,7 +13,6 @@ namespace BrainBoostBreak.Server
 {
     public class QuestionDatabase : DbContext
     {
-
         public DbSet<Question> Questions { get; set; }
 
         public DbSet<Topic> Topics { get; set; }
@@ -24,18 +23,18 @@ namespace BrainBoostBreak.Server
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            var topicZitate = new Topic() { TopicId = 1, Name = "Zitate" };
+            //var topicZitate = new Topic() { TopicID = 1, Name = "Zitate" };
 
-            var a1 = new Answer() { AnswerId = 1, Text = "abc" };
-            var a2 = new Answer() { AnswerId = 2, Text = "abcd" };
-            var a3 = new Answer() { AnswerId = 3, Text = "abce" };
-            var a4 = new Answer() { AnswerId = 4, Text = "abcf" };
+            //var a1 = new Answer() { AnswerID = 1, Text = "abc" };
+            //var a2 = new Answer() { AnswerID = 2, Text = "abcd" };
+            //var a3 = new Answer() { AnswerID = 3, Text = "abce" };
+            //var a4 = new Answer() { AnswerID = 4, Text = "abcf" };
 
-            modelBuilder.Entity<Topic>().HasData(topicZitate);
+            //modelBuilder.Entity<Topic>().HasData(topicZitate);
 
-            modelBuilder.Entity<Answer>().HasData(a1, a2, a3, a4);
+            //modelBuilder.Entity<Answer>().HasData(a1, a2, a3, a4);
 
-            modelBuilder.Entity<Question>().HasData(new Question() { QuestionId = 1, Answer = a1, Text = "asdf", Topic = topicZitate });
+            //modelBuilder.Entity<Question>().HasData(new Question() { QuestionID = 1, AnswerID = a1, Text = "asdf", TopicID = topicZitate });
 
             base.OnModelCreating(modelBuilder);
         }
@@ -44,21 +43,6 @@ namespace BrainBoostBreak.Server
         {
             optionsBuilder.UseNpgsql("User ID = BrainBoostBreak; Password = BrainBoostPW; Server = 127.0.0.1; Port = 5432; Database = BrainBoostBreak; Pooling = true;", opt => opt.CommandTimeout(300));
         }
-    }
-    public class Question
-    {
-        //Classname+"Id" at end is automatic primary Key
-        public int QuestionId { get; set; }
-
-        [Required]
-        public Topic Topic { get; set; }
-
-        [Required]
-        public string Text { get; set; }
-
-        [Required]
-        public Answer Answer { get; set; }
-
     }
 
     public class Answer
@@ -75,6 +59,22 @@ namespace BrainBoostBreak.Server
 
         [Required]
         public string Name;
+    }
+
+    public class Question
+    {
+        //Classname+"Id" at end is automatic primary Key
+        public int QuestionId { get; set; }
+
+        [Required]
+        public Topic Topic { get; set; }
+
+        [Required]
+        public string Text { get; set; }
+
+        [Required]
+        public Answer Answer { get; set; }
+
     }
 
     public enum ObjectTypeEnum

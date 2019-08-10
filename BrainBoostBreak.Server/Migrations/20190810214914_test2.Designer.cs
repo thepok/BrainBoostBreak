@@ -9,8 +9,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BrainBoostBreak.Server.Migrations
 {
     [DbContext(typeof(QuestionDatabase))]
-    [Migration("20190810104846_try1")]
-    partial class try1
+    [Migration("20190810214914_test2")]
+    partial class test2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -25,8 +25,12 @@ namespace BrainBoostBreak.Server.Migrations
                     b.Property<int>("AnswerId")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("AnswerDescription");
+
                     b.Property<string>("Text")
                         .IsRequired();
+
+                    b.Property<string>("Url");
 
                     b.HasKey("AnswerId");
 
@@ -35,41 +39,64 @@ namespace BrainBoostBreak.Server.Migrations
                     b.HasData(
                         new
                         {
-                            AnswerId = -1,
-                            Text = "abc"
+                            AnswerId = 1,
+                            Text = "Sokrates"
                         },
                         new
                         {
-                            AnswerId = -2,
-                            Text = "abcd"
+                            AnswerId = 2,
+                            Text = "Platon"
                         },
                         new
                         {
-                            AnswerId = -3,
-                            Text = "abce"
+                            AnswerId = 3,
+                            Text = "Friedrich Nietzsche"
                         },
                         new
                         {
-                            AnswerId = -4,
-                            Text = "abcf"
+                            AnswerId = 4,
+                            Text = "Paracelsus"
+                        },
+                        new
+                        {
+                            AnswerId = 5,
+                            Text = "Erasmus von Rotterdam"
+                        },
+                        new
+                        {
+                            AnswerId = 6,
+                            Text = "Baruch de Spinoza"
+                        },
+                        new
+                        {
+                            AnswerId = 7,
+                            Text = "Mahatma Gandhi"
+                        },
+                        new
+                        {
+                            AnswerId = 8,
+                            Text = "Fidel Castro"
+                        },
+                        new
+                        {
+                            AnswerId = 9,
+                            Text = "Sokrates"
+                        },
+                        new
+                        {
+                            AnswerId = 10,
+                            Text = "Platon"
+                        },
+                        new
+                        {
+                            AnswerId = 11,
+                            Text = "Friedrich Nietzsche"
+                        },
+                        new
+                        {
+                            AnswerId = 12,
+                            Text = "Paracelsus"
                         });
-                });
-
-            modelBuilder.Entity("BrainBoostBreak.Server.Link", b =>
-                {
-                    b.Property<int>("LinkId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("ObjectId");
-
-                    b.Property<int>("ObjectType");
-
-                    b.Property<string>("Url")
-                        .IsRequired();
-
-                    b.HasKey("LinkId");
-
-                    b.ToTable("Links");
                 });
 
             modelBuilder.Entity("BrainBoostBreak.Server.Question", b =>
@@ -95,9 +122,16 @@ namespace BrainBoostBreak.Server.Migrations
                     b.HasData(
                         new
                         {
-                            QuestionId = -1,
-                            AnswerId = -1,
-                            Text = "bla bla?",
+                            QuestionId = 1,
+                            AnswerId = 1,
+                            Text = "Wer wird folgendes Zitat zugeschrieben: 'Wer glaubt, etwas zu sein, hat aufgehört, etwas zu werden.'",
+                            TopicId = -1
+                        },
+                        new
+                        {
+                            QuestionId = 2,
+                            AnswerId = 7,
+                            Text = "Wer wird folgendes Zitat zugeschrieben: 'Gewalt ist die Waffe des Schwachen.'",
                             TopicId = -1
                         });
                 });

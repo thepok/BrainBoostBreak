@@ -11,11 +11,14 @@ namespace BrainBoostBreak.Server
 
         public static QuestionTO GenQuestion()
         {
-            if (DateTime.Now.Millisecond % 2 == 0)
+            using (QuestionDatabase db=new QuestionDatabase())
             {
-                return new QuestionTO() { Id = 1, Text = "What is 5 + 5?", Answers = new AnswerTO[] { new AnswerTO() { Text = "10", Id = 1 }, new AnswerTO() { Text = "100", Id = 2 }, new AnswerTO() { Text = "50", Id = 3 }, new AnswerTO() { Text = "42", Id = 4 } } };
+                var questions = db.Questions.ToArray();
+                Random rnd = new Random(System.Environment.TickCount);
+                var randomQuestion = questions[rnd.Next(questions.Length)];
+                return new QuestionTO() {Text=randomQuestion.Text, Id= randomQuestion.QuestionId,Answers=
+                    db.Answers.Take(5).Select(a=>new AnswerTO() { Id = a.AnswerId, Text = a.Text}).ToArray() };
             }
-            return new QuestionTO() { Id = 2, Text = "Hallo Echo?", Answers = new AnswerTO[] { new AnswerTO() { Text = "Hallo Du", Id = 1 }, new AnswerTO() { Text = "Hallo Otto", Id = 2 } } };
         }
     }
 }

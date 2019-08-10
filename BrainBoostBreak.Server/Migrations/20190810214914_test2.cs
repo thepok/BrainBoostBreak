@@ -3,7 +3,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace BrainBoostBreak.Server.Migrations
 {
-    public partial class try1 : Migration
+    public partial class test2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,26 +13,13 @@ namespace BrainBoostBreak.Server.Migrations
                 {
                     AnswerId = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
-                    Text = table.Column<string>(nullable: false)
+                    Text = table.Column<string>(nullable: false),
+                    Url = table.Column<string>(nullable: true),
+                    AnswerDescription = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Answers", x => x.AnswerId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Links",
-                columns: table => new
-                {
-                    LinkId = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
-                    ObjectId = table.Column<int>(nullable: false),
-                    ObjectType = table.Column<int>(nullable: false),
-                    Url = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Links", x => x.LinkId);
                 });
 
             migrationBuilder.CreateTable(
@@ -76,13 +63,21 @@ namespace BrainBoostBreak.Server.Migrations
 
             migrationBuilder.InsertData(
                 table: "Answers",
-                columns: new[] { "AnswerId", "Text" },
+                columns: new[] { "AnswerId", "AnswerDescription", "Text", "Url" },
                 values: new object[,]
                 {
-                    { -1, "abc" },
-                    { -2, "abcd" },
-                    { -3, "abce" },
-                    { -4, "abcf" }
+                    { 1, null, "Sokrates", null },
+                    { 2, null, "Platon", null },
+                    { 3, null, "Friedrich Nietzsche", null },
+                    { 4, null, "Paracelsus", null },
+                    { 5, null, "Erasmus von Rotterdam", null },
+                    { 6, null, "Baruch de Spinoza", null },
+                    { 7, null, "Mahatma Gandhi", null },
+                    { 8, null, "Fidel Castro", null },
+                    { 9, null, "Sokrates", null },
+                    { 10, null, "Platon", null },
+                    { 11, null, "Friedrich Nietzsche", null },
+                    { 12, null, "Paracelsus", null }
                 });
 
             migrationBuilder.InsertData(
@@ -93,7 +88,11 @@ namespace BrainBoostBreak.Server.Migrations
             migrationBuilder.InsertData(
                 table: "Questions",
                 columns: new[] { "QuestionId", "AnswerId", "Text", "TopicId" },
-                values: new object[] { -1, -1, "bla bla?", -1 });
+                values: new object[,]
+                {
+                    { 1, 1, "Wer wird folgendes Zitat zugeschrieben: 'Wer glaubt, etwas zu sein, hat aufgehört, etwas zu werden.'", -1 },
+                    { 2, 7, "Wer wird folgendes Zitat zugeschrieben: 'Gewalt ist die Waffe des Schwachen.'", -1 }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Questions_AnswerId",
@@ -108,9 +107,6 @@ namespace BrainBoostBreak.Server.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Links");
-
             migrationBuilder.DropTable(
                 name: "Questions");
 

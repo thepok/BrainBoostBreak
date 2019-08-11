@@ -1,0 +1,98 @@
+﻿@page "/quiz"
+@using BrainBoostBreak.Shared
+@inject HttpClient Http
+@inject IJSRuntime JsRuntime;
+
+
+@if (Result != null)
+{
+    <h1>Letze Frage:</h1>
+
+    @Result.Text
+
+}
+<br />
+
+<h1>Nächste Frage</h1>
+
+@if (Question == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    @Question.Text
+    <br />
+    <br />
+    foreach (var answer in Question.Answers)
+    {
+        <button @onclick="@(()=>GetNext(Question.Id, answer.Id))">@answer.Text</button>
+        <br />
+    }
+}
+
+@code {
+
+        QuestionTO _question;
+        QuestionTO Question{ get
+            {
+                return _question;
+            }
+            set
+            {
+                _question = value;
+                StateHasChanged();
+                JsRuntime.InvokeAsync<object>("speak", Question.Text);
+            } }
+
+        QuestionTO NextQuestion;
+
+        ResultTO _result;
+        ResultTO Result {
+            get{ return _result; }
+            set{ _result = value;
+                StateHasChanged();
+            }
+        }
+
+
+
+
+    [Parameter]
+    public int QuestionId { get; set; }
+
+    [Parameter]
+    public int AnswerId { get; set; }
+
+    protected override async Task OnInitAsync()
+    {
+
+        Http.GetJsonAsync<QuestionTO>("Question").ContinueWith(q =>
+        {
+            Question = q.Result;
+        });
+        Http.GetJsonAsync<QuestionTO>("Question").ContinueWith(q =>
+        {
+            NextQuestion = q.Result;
+        });
+    }
+
+    public async void GetNext(int questionId, int answerId)
+    {
+
+        Question = NextQuestion;
+        NextQuestion = null;
+
+        Http.GetJsonAsync<QuestionTO>("Question").ContinueWith(q =>
+        {
+            NextQuestion = q.Result;
+            if (Question == null)
+            {
+                Question = NextQuestion;
+            }
+        });
+
+        Http.GetJsonAsync<ResultTO>(@"Result\" + questionId + @"\" + answerId).ContinueWith(r=>Result=r.Result);
+
+    }
+}

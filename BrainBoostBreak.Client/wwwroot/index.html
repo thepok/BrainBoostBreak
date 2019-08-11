@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -12,5 +12,34 @@
     <app>Loading...</app>
 
     <script src="_framework/blazor.webassembly.js"></script>
+
+    <script>
+        var synth = window.speechSynthesis;
+        var voices = [];
+        var voice;
+
+        function populateVoiceList() {
+            voices = synth.getVoices();
+            voice = voices[0];
+            for (i = 0; i < voices.length; i++) {
+                if (voices[i].name === "Google Deutsch") {
+                    voice = voices[i];
+                    break;
+                }
+            }
+        }
+
+        populateVoiceList();
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = populateVoiceList;
+        }
+
+        function speak(mytext) {
+            var utterThis = new SpeechSynthesisUtterance(mytext);
+            utterThis.voice = voice;
+            synth.speak(utterThis);
+        }
+    </script>
+
 </body>
 </html>

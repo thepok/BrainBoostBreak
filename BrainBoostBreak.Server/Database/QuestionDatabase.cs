@@ -26,11 +26,8 @@ namespace BrainBoostBreak.Server
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //Use negative PrimaryKeys to avoid conflicts with Database Sequenze generated Keys
-            var topicQuote = new Topic() { TopicId = -1, Name = "Zitate" };
-
-            modelBuilder.Entity<Topic>().HasData(topicQuote);
-
-            QuestionsQuote.InitData(modelBuilder, topicQuote);
+            QuestionsQuote.InitData(modelBuilder);
+            UpperAndLowercaseLetters.InitData(modelBuilder);
 
             base.OnModelCreating(modelBuilder);
         }
@@ -52,6 +49,11 @@ namespace BrainBoostBreak.Server
         public string Url { get; set; }
 
         public string AnswerDescription { get; set; }
+
+        [ForeignKey("Topic")]
+        public int TopicId { get; set; }
+
+        public Topic Topic { get; set; }
     }
 
     public class Topic

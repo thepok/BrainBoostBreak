@@ -8,5 +8,6 @@ namespace BrainBoostBreak.Shared
     {
         public string Text { get; set; }
 
+        public bool Correct { get; set; }
     }
 }

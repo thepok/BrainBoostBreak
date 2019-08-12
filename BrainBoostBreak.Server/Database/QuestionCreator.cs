@@ -14,7 +14,7 @@ namespace BrainBoostBreak.Server.Database
 
             foreach (var answer in answers)
             {
-                answerList.Add(new Answer { AnswerId = QuestionDatabase.AnswerId++, Text = answer });
+                answerList.Add(new Answer { AnswerId = QuestionDatabase.AnswerId++, Text = answer , TopicId = topic.TopicId});
             }
 
             modelBuilder.Entity<Answer>().HasData(answerList);
@@ -22,11 +22,5 @@ namespace BrainBoostBreak.Server.Database
             modelBuilder.Entity<Question>().HasData(new Question() { QuestionId = QuestionDatabase.QuestionId++, AnswerId = answerList.FirstOrDefault().AnswerId, Text = question, TopicId = topic.TopicId }); ;
         }
 
-        public static void Create(ModelBuilder modelBuilder, Topic topic, string question, params Answer[] answers)
-        {
-            modelBuilder.Entity<Answer>().HasData(answers);
-
-            modelBuilder.Entity<Question>().HasData(new Question() { QuestionId = QuestionDatabase.QuestionId++, Answer = answers.FirstOrDefault(), Text = question, Topic = topic });
-        }
     }
 }

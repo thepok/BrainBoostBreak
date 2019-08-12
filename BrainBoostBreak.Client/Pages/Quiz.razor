@@ -1,4 +1,5 @@
 ﻿@page "/quiz"
+@page "/"
 @using BrainBoostBreak.Shared
 @inject HttpClient Http
 @inject IJSRuntime JsRuntime;
@@ -43,7 +44,7 @@ else
         {
             _question = value;
             StateHasChanged();
-            JsRuntime.InvokeAsync<object>("speak", Question.Text);
+            Speak(Question.Text);
         }
     }
 
@@ -57,6 +58,7 @@ else
         {
             _result = value;
             StateHasChanged();
+            Speak(value.Text);
         }
     }
 
@@ -68,6 +70,11 @@ else
 
     [Parameter]
     public int AnswerId { get; set; }
+
+    private void Speak(string text)
+    {
+        JsRuntime.InvokeAsync<object>("speak", text);
+    }
 
     protected override async Task OnInitAsync()
     {
@@ -84,6 +91,14 @@ else
 
     public async void GetNext(int questionId, int answerId)
     {
+        if (answerId == Question.CorrectAnswerId)
+        {
+            Result = new ResultTO() { Correct = true, Text = "Richtig" };
+        }
+        else
+        {
+            Result = new ResultTO() { Correct = false, Text = "Falsch" };
+        }
 
         Question = NextQuestion;
         NextQuestion = null;
@@ -96,8 +111,5 @@ else
                 Question = NextQuestion;
             }
         });
-
-        Http.GetJsonAsync<ResultTO>(@"Result\" + questionId + @"\" + answerId).ContinueWith(r => Result = r.Result);
-
     }
 }

@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MoreLinq;
+using Microsoft.EntityFrameworkCore;
 
 namespace BrainBoostBreak.Server
 {
@@ -15,13 +17,16 @@ namespace BrainBoostBreak.Server
                 var rnd = new Random();
                 var toSkip = rnd.Next(0, db.Questions.Count() - 1);
 
-                var q = db.Questions.OrderBy(r => Guid.NewGuid()).Skip(toSkip).Take(1).FirstOrDefault();
+                var question = db.Questions.Include(q=>q.Answer).OrderBy(r => Guid.NewGuid()).Skip(toSkip).Take(1).FirstOrDefault();
+                var answers = db.Answers.Where(a=>a.TopicId==question.TopicId).Select(a => new AnswerTO() { Id = a.AnswerId, Text = a.Text }).Take(5).ToList();
 
-                return new QuestionTO()
-                {
-                    Text = q.Text,
-                    Id = q.QuestionId,
-                    Answers = db.Answers.Take(5).Select(a => new AnswerTO() { Id = a.AnswerId, Text = a.Text }).ToArray()
+                answers.Add(new AnswerTO() { Text = question.Answer.Text, Id = question.AnswerId });
+
+                return new QuestionTO() {
+                    Text =question.Text,
+                    Id = question.QuestionId,
+                    Answers =answers.Shuffle().ToArray(),
+                    CorrectAnswerId=question.AnswerId
                 };
             }
         }

@@ -8,10 +8,14 @@ namespace BrainBoostBreak.Server.Database.Topics
 {
     public class QuestionsQuote
     {
-        public static void InitData(ModelBuilder modelBuilder, Topic topic)
+        public static void InitData(ModelBuilder modelBuilder)
         {
-            QuestionCreator.Create(modelBuilder, topic, "Wem wird folgendes Zitat zugeschrieben: 'Wer glaubt, etwas zu sein, hat aufgehört, etwas zu werden.'", "Sokrates", "Platon", "Friedrich Nietzsche", "Paracelsus", "Erasmus von Rotterdam", "Baruch de Spinoza");
-            QuestionCreator.Create(modelBuilder, topic, "Wem wird folgendes Zitat zugeschrieben: 'Gewalt ist die Waffe des Schwachen.'", "Mahatma Gandhi", "Fidel Castro", "Sokrates", "Platon", "Friedrich Nietzsche", "Paracelsus");
+            var topicQuote = new Topic() { TopicId = -1, Name = "Zitate" };
+
+            modelBuilder.Entity<Topic>().HasData(topicQuote);
+
+            QuestionCreator.Create(modelBuilder, topicQuote, "Wem wird folgendes Zitat zugeschrieben: 'Wer glaubt, etwas zu sein, hat aufgehört, etwas zu werden.'", "Sokrates", "Platon", "Friedrich Nietzsche", "Paracelsus", "Erasmus von Rotterdam", "Baruch de Spinoza");
+            QuestionCreator.Create(modelBuilder, topicQuote, "Wem wird folgendes Zitat zugeschrieben: 'Gewalt ist die Waffe des Schwachen.'", "Mahatma Gandhi", "Fidel Castro", "Sokrates", "Platon", "Friedrich Nietzsche", "Paracelsus");
 
         }
     }

@@ -9,17 +9,17 @@ using Microsoft.Extensions.Logging;
 namespace BrainBoostBreak.Server.Controllers
 {
     [ApiController]
-    [Route("Result")]
-    public class ResultController : ControllerBase
+    [Route("topics")]
+    public class TopicsController : ControllerBase
     {
         private readonly ILogger<BrainBoostBreakController> logger;
 
-        public ResultController(ILogger<BrainBoostBreakController> logger)
+        public TopicsController(ILogger<BrainBoostBreakController> logger)
         {
             this.logger = logger;
         }
 
-        [HttpGet("{QuestionId}/{AnswerId}")]
+        [HttpGet]
         public ResultTO Get(int  QuestionId, int AnswerId)
         {
             //Datenbank abfragen

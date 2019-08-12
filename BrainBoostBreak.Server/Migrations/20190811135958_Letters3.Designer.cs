@@ -2,15 +2,17 @@
 using BrainBoostBreak.Server;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace BrainBoostBreak.Server.Migrations
 {
     [DbContext(typeof(QuestionDatabase))]
-    partial class QuestionDatabaseModelSnapshot : ModelSnapshot
+    [Migration("20190811135958_Letters3")]
+    partial class Letters3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,13 +30,9 @@ namespace BrainBoostBreak.Server.Migrations
                     b.Property<string>("Text")
                         .IsRequired();
 
-                    b.Property<int>("TopicId");
-
                     b.Property<string>("Url");
 
                     b.HasKey("AnswerId");
-
-                    b.HasIndex("TopicId");
 
                     b.ToTable("Answers");
 
@@ -42,248 +40,207 @@ namespace BrainBoostBreak.Server.Migrations
                         new
                         {
                             AnswerId = 1,
-                            Text = "Sokrates",
-                            TopicId = -1
+                            Text = "Sokrates"
                         },
                         new
                         {
                             AnswerId = 2,
-                            Text = "Platon",
-                            TopicId = -1
+                            Text = "Platon"
                         },
                         new
                         {
                             AnswerId = 3,
-                            Text = "Friedrich Nietzsche",
-                            TopicId = -1
+                            Text = "Friedrich Nietzsche"
                         },
                         new
                         {
                             AnswerId = 4,
-                            Text = "Paracelsus",
-                            TopicId = -1
+                            Text = "Paracelsus"
                         },
                         new
                         {
                             AnswerId = 5,
-                            Text = "Erasmus von Rotterdam",
-                            TopicId = -1
+                            Text = "Erasmus von Rotterdam"
                         },
                         new
                         {
                             AnswerId = 6,
-                            Text = "Baruch de Spinoza",
-                            TopicId = -1
+                            Text = "Baruch de Spinoza"
                         },
                         new
                         {
                             AnswerId = 7,
-                            Text = "Mahatma Gandhi",
-                            TopicId = -1
+                            Text = "Mahatma Gandhi"
                         },
                         new
                         {
                             AnswerId = 8,
-                            Text = "Fidel Castro",
-                            TopicId = -1
+                            Text = "Fidel Castro"
                         },
                         new
                         {
                             AnswerId = 9,
-                            Text = "Sokrates",
-                            TopicId = -1
+                            Text = "Sokrates"
                         },
                         new
                         {
                             AnswerId = 10,
-                            Text = "Platon",
-                            TopicId = -1
+                            Text = "Platon"
                         },
                         new
                         {
                             AnswerId = 11,
-                            Text = "Friedrich Nietzsche",
-                            TopicId = -1
+                            Text = "Friedrich Nietzsche"
                         },
                         new
                         {
                             AnswerId = 12,
-                            Text = "Paracelsus",
-                            TopicId = -1
+                            Text = "Paracelsus"
                         },
                         new
                         {
                             AnswerId = 13,
-                            Text = "a",
-                            TopicId = -2
+                            Text = "a"
                         },
                         new
                         {
                             AnswerId = 14,
-                            Text = "b",
-                            TopicId = -2
+                            Text = "b"
                         },
                         new
                         {
                             AnswerId = 15,
-                            Text = "c",
-                            TopicId = -2
+                            Text = "c"
                         },
                         new
                         {
                             AnswerId = 16,
-                            Text = "d",
-                            TopicId = -2
+                            Text = "d"
                         },
                         new
                         {
                             AnswerId = 17,
-                            Text = "e",
-                            TopicId = -2
+                            Text = "e"
                         },
                         new
                         {
                             AnswerId = 18,
-                            Text = "f",
-                            TopicId = -2
+                            Text = "f"
                         },
                         new
                         {
                             AnswerId = 19,
-                            Text = "g",
-                            TopicId = -2
+                            Text = "g"
                         },
                         new
                         {
                             AnswerId = 20,
-                            Text = "h",
-                            TopicId = -2
+                            Text = "h"
                         },
                         new
                         {
                             AnswerId = 21,
-                            Text = "i",
-                            TopicId = -2
+                            Text = "i"
                         },
                         new
                         {
                             AnswerId = 22,
-                            Text = "j",
-                            TopicId = -2
+                            Text = "j"
                         },
                         new
                         {
                             AnswerId = 23,
-                            Text = "k",
-                            TopicId = -2
+                            Text = "k"
                         },
                         new
                         {
                             AnswerId = 24,
-                            Text = "l",
-                            TopicId = -2
+                            Text = "l"
                         },
                         new
                         {
                             AnswerId = 25,
-                            Text = "m",
-                            TopicId = -2
+                            Text = "m"
                         },
                         new
                         {
                             AnswerId = 26,
-                            Text = "n",
-                            TopicId = -2
+                            Text = "n"
                         },
                         new
                         {
                             AnswerId = 27,
-                            Text = "o",
-                            TopicId = -2
+                            Text = "o"
                         },
                         new
                         {
                             AnswerId = 28,
-                            Text = "p",
-                            TopicId = -2
+                            Text = "p"
                         },
                         new
                         {
                             AnswerId = 29,
-                            Text = "q",
-                            TopicId = -2
+                            Text = "q"
                         },
                         new
                         {
                             AnswerId = 30,
-                            Text = "r",
-                            TopicId = -2
+                            Text = "r"
                         },
                         new
                         {
                             AnswerId = 31,
-                            Text = "s",
-                            TopicId = -2
+                            Text = "s"
                         },
                         new
                         {
                             AnswerId = 32,
-                            Text = "t",
-                            TopicId = -2
+                            Text = "t"
                         },
                         new
                         {
                             AnswerId = 33,
-                            Text = "u",
-                            TopicId = -2
+                            Text = "u"
                         },
                         new
                         {
                             AnswerId = 34,
-                            Text = "v",
-                            TopicId = -2
+                            Text = "v"
                         },
                         new
                         {
                             AnswerId = 35,
-                            Text = "w",
-                            TopicId = -2
+                            Text = "w"
                         },
                         new
                         {
                             AnswerId = 36,
-                            Text = "x",
-                            TopicId = -2
+                            Text = "x"
                         },
                         new
                         {
                             AnswerId = 37,
-                            Text = "y",
-                            TopicId = -2
+                            Text = "y"
                         },
                         new
                         {
                             AnswerId = 38,
-                            Text = "z",
-                            TopicId = -2
+                            Text = "z"
                         },
                         new
                         {
                             AnswerId = 39,
-                            Text = "ä",
-                            TopicId = -2
+                            Text = "ä"
                         },
                         new
                         {
                             AnswerId = 40,
-                            Text = "ü",
-                            TopicId = -2
+                            Text = "ü"
                         },
                         new
                         {
                             AnswerId = 41,
-                            Text = "ö",
-                            TopicId = -2
+                            Text = "ö"
                         });
                 });
 
@@ -545,15 +502,6 @@ namespace BrainBoostBreak.Server.Migrations
                         {
                             TopicId = -2
                         });
-                });
-
-            modelBuilder.Entity("BrainBoostBreak.Server.Answer", b =>
-                {
-                    b.HasOne("BrainBoostBreak.Server.Topic", "Topic")
-                        .WithMany()
-                        .HasForeignKey("TopicId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("BrainBoostBreak.Server.Question", b =>

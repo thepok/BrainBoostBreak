@@ -1,4 +1,5 @@
 ﻿@page "/quiz"
+@page "/"
 @using BrainBoostBreak.Shared
 @inject HttpClient Http
 @inject IJSRuntime JsRuntime;
@@ -26,7 +27,7 @@ else
     <br />
     foreach (var answer in Question.Answers)
     {
-        <button @onclick="@(()=>GetNext(Question.Id, answer.Id))">@answer.Text</button>
+        <button @onclick="@(()=>GetNext(Question.Id, answer.Id))" style="width:100%">@answer.Text</button>
         <br />
     }
 }

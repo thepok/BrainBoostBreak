@@ -27,8 +27,7 @@ else
     <br />
     foreach (var answer in Question.Answers)
     {
-        <button @onclick="@(()=>GetNext(Question.Id, answer.Id))" style="width:100%">@answer.Text</button>
-        <br />
+        <div class="gradient" @onclick="@(()=>GetNext(Question.Id, answer.Id))">@answer.Text</div>
     }
 }
 

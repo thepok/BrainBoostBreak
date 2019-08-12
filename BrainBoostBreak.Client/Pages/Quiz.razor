@@ -34,27 +34,34 @@ else
 
 @code {
 
-        QuestionTO _question;
-        QuestionTO Question{ get
-            {
-                return _question;
-            }
-            set
-            {
-                _question = value;
-                StateHasChanged();
-                JsRuntime.InvokeAsync<object>("speak", Question.Text);
-            } }
-
-        QuestionTO NextQuestion;
-
-        ResultTO _result;
-        ResultTO Result {
-            get{ return _result; }
-            set{ _result = value;
-                StateHasChanged();
-            }
+    QuestionTO _question;
+    QuestionTO Question
+    {
+        get
+        {
+            return _question;
         }
+        set
+        {
+            _question = value;
+            StateHasChanged();
+            Speak(Question.Text);
+        }
+    }
+
+    QuestionTO NextQuestion;
+
+    ResultTO _result;
+    ResultTO Result
+    {
+        get { return _result; }
+        set
+        {
+            _result = value;
+            StateHasChanged();
+            Speak(value.Text);
+        }
+    }
 
 
 
@@ -64,6 +71,11 @@ else
 
     [Parameter]
     public int AnswerId { get; set; }
+
+    private void Speak(string text)
+    {
+        JsRuntime.InvokeAsync<object>("speak", text);
+    }
 
     protected override async Task OnInitAsync()
     {
@@ -80,6 +92,14 @@ else
 
     public async void GetNext(int questionId, int answerId)
     {
+        if (answerId == Question.CorrectAnswerId)
+        {
+            Result = new ResultTO() { Correct = true, Text = "Richtig" };
+        }
+        else
+        {
+            Result = new ResultTO() { Correct = false, Text = "Falsch" };
+        }
 
         Question = NextQuestion;
         NextQuestion = null;
@@ -92,8 +112,5 @@ else
                 Question = NextQuestion;
             }
         });
-
-        Http.GetJsonAsync<ResultTO>(@"Result\" + questionId + @"\" + answerId).ContinueWith(r=>Result=r.Result);
-
     }
 }

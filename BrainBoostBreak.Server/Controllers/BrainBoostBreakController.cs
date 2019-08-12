@@ -25,7 +25,7 @@ namespace BrainBoostBreak.Server.Controllers
 
 #if DEBUG
             //Delay to Keep design
-            System.Threading.Thread.Sleep(3000);
+            System.Threading.Thread.Sleep(1000);
 #endif
             return ProcedualQuestionGenerator.GenQuestion();
         }

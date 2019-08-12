@@ -12,5 +12,7 @@ namespace BrainBoostBreak.Shared
 
         public AnswerTO[] Answers { get; set; }
 
+        public int CorrectAnswerId { get; set; }
+
     }
 }

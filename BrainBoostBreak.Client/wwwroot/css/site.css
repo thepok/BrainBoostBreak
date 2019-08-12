@@ -10,13 +10,17 @@ app {
     flex-direction: column;
 }
 
-.gradient {
+.question {
     background-image: linear-gradient(to bottom right, #3399ff, #3366ff);
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 50px;
     color: #FFFFFF;
+}
+
+.selected {
+    background-image: linear-gradient(to bottom right, #ff3300, #cc0000);
 }
 
 .top-row {

@@ -27,7 +27,12 @@ else
     <br />
     foreach (var answer in Question.Answers)
     {
-        <div class="gradient" @onclick="@(()=>GetNext(Question.Id, answer.Id))">@answer.Text</div>
+        @if (answer.Id == SelectedAnswerId)
+        {
+            <div class="question selected" @onclick="@(() => GetNext(Question.Id, answer.Id))">@answer.Text</div>
+        } else {
+            <div class="question" @onclick="@(()=>GetNext(Question.Id, answer.Id))">@answer.Text</div>
+        }
     }
 }
 
@@ -62,35 +67,31 @@ else
         }
     }
 
-
-
-
     [Parameter]
     public int QuestionId { get; set; }
 
     [Parameter]
     public int AnswerId { get; set; }
 
+<<<<<<< HEAD
     private void Speak(string text)
     {
         JsRuntime.InvokeAsync<object>("speak", text);
     }
+=======
+    int SelectedAnswerId { get; set; }
+>>>>>>> ff24bb6
 
     protected override async Task OnInitAsync()
     {
+        Question = await Http.GetJsonAsync<QuestionTO>("Question");
 
-        Http.GetJsonAsync<QuestionTO>("Question").ContinueWith(q =>
-        {
-            Question = q.Result;
-        });
-        Http.GetJsonAsync<QuestionTO>("Question").ContinueWith(q =>
-        {
-            NextQuestion = q.Result;
-        });
+        NextQuestion = await Http.GetJsonAsync<QuestionTO>("Question");
     }
 
-    public async void GetNext(int questionId, int answerId)
+    public async Task GetNext(int questionId, int answerId)
     {
+<<<<<<< HEAD
         if (answerId == Question.CorrectAnswerId)
         {
             Result = new ResultTO() { Correct = true, Text = "Richtig" };
@@ -99,17 +100,29 @@ else
         {
             Result = new ResultTO() { Correct = false, Text = "Falsch" };
         }
+=======
+        SelectedAnswerId = answerId;
+>>>>>>> ff24bb6
 
         Question = NextQuestion;
-        NextQuestion = null;
 
-        Http.GetJsonAsync<QuestionTO>("Question").ContinueWith(q =>
+        NextQuestion = await Http.GetJsonAsync<QuestionTO>("Question");
+
+        if (Question == null)
         {
+<<<<<<< HEAD
             NextQuestion = q.Result;
             if (Question == null)
             {
                 Question = NextQuestion;
             }
         });
+=======
+            Question = NextQuestion;
+        }
+
+        Result = await Http.GetJsonAsync<ResultTO>(@"Result\" + questionId + @"\" + answerId);
+
+>>>>>>> ff24bb6
     }
 }

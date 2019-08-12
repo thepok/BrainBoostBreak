@@ -26,34 +26,39 @@ else
     <br />
     foreach (var answer in Question.Answers)
     {
-        <button @onclick="@(()=>GetNext(Question.Id, answer.Id))">@answer.Text</button>
-        <br />
+        <div class="gradient" @onclick="@(()=>GetNext(Question.Id, answer.Id))">@answer.Text</div>
     }
 }
 
 @code {
 
-        QuestionTO _question;
-        QuestionTO Question{ get
-            {
-                return _question;
-            }
-            set
-            {
-                _question = value;
-                StateHasChanged();
-                JsRuntime.InvokeAsync<object>("speak", Question.Text);
-            } }
-
-        QuestionTO NextQuestion;
-
-        ResultTO _result;
-        ResultTO Result {
-            get{ return _result; }
-            set{ _result = value;
-                StateHasChanged();
-            }
+    QuestionTO _question;
+    QuestionTO Question
+    {
+        get
+        {
+            return _question;
         }
+        set
+        {
+            _question = value;
+            StateHasChanged();
+            JsRuntime.InvokeAsync<object>("speak", Question.Text);
+        }
+    }
+
+    QuestionTO NextQuestion;
+
+    ResultTO _result;
+    ResultTO Result
+    {
+        get { return _result; }
+        set
+        {
+            _result = value;
+            StateHasChanged();
+        }
+    }
 
 
 
@@ -92,7 +97,7 @@ else
             }
         });
 
-        Http.GetJsonAsync<ResultTO>(@"Result\" + questionId + @"\" + answerId).ContinueWith(r=>Result=r.Result);
+        Http.GetJsonAsync<ResultTO>(@"Result\" + questionId + @"\" + answerId).ContinueWith(r => Result = r.Result);
 
     }
 }

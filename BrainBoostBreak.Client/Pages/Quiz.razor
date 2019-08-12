@@ -26,7 +26,12 @@ else
     <br />
     foreach (var answer in Question.Answers)
     {
-        <div class="gradient" @onclick="@(()=>GetNext(Question.Id, answer.Id))">@answer.Text</div>
+        @if (answer.Id == SelectedAnswerId)
+        {
+            <div class="question selected" @onclick="@(() => GetNext(Question.Id, answer.Id))">@answer.Text</div>
+        } else {
+            <div class="question" @onclick="@(()=>GetNext(Question.Id, answer.Id))">@answer.Text</div>
+        }
     }
 }
 
@@ -60,44 +65,35 @@ else
         }
     }
 
-
-
-
     [Parameter]
     public int QuestionId { get; set; }
 
     [Parameter]
     public int AnswerId { get; set; }
 
+    int SelectedAnswerId { get; set; }
+
     protected override async Task OnInitAsync()
     {
+        Question = await Http.GetJsonAsync<QuestionTO>("Question");
 
-        Http.GetJsonAsync<QuestionTO>("Question").ContinueWith(q =>
-        {
-            Question = q.Result;
-        });
-        Http.GetJsonAsync<QuestionTO>("Question").ContinueWith(q =>
-        {
-            NextQuestion = q.Result;
-        });
+        NextQuestion = await Http.GetJsonAsync<QuestionTO>("Question");
     }
 
-    public async void GetNext(int questionId, int answerId)
+    public async Task GetNext(int questionId, int answerId)
     {
+        SelectedAnswerId = answerId;
 
         Question = NextQuestion;
-        NextQuestion = null;
 
-        Http.GetJsonAsync<QuestionTO>("Question").ContinueWith(q =>
+        NextQuestion = await Http.GetJsonAsync<QuestionTO>("Question");
+
+        if (Question == null)
         {
-            NextQuestion = q.Result;
-            if (Question == null)
-            {
-                Question = NextQuestion;
-            }
-        });
+            Question = NextQuestion;
+        }
 
-        Http.GetJsonAsync<ResultTO>(@"Result\" + questionId + @"\" + answerId).ContinueWith(r => Result = r.Result);
+        Result = await Http.GetJsonAsync<ResultTO>(@"Result\" + questionId + @"\" + answerId);
 
     }
 }

@@ -19,10 +19,6 @@ app {
     color: #FFFFFF;
 }
 
-.selected {
-    background-image: linear-gradient(to bottom right, #ff3300, #cc0000);
-}
-
 .top-row {
     height: 3.5rem;
     display: flex;

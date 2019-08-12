@@ -27,12 +27,7 @@ else
     <br />
     foreach (var answer in Question.Answers)
     {
-        @if (answer.Id == SelectedAnswerId)
-        {
-            <div class="question selected" @onclick="@(() => GetNext(Question.Id, answer.Id))">@answer.Text</div>
-        } else {
-            <div class="question" @onclick="@(()=>GetNext(Question.Id, answer.Id))">@answer.Text</div>
-        }
+        <div class="question" @onclick="@(() => GetNext(Question.Id, answer.Id))">@answer.Text</div>
     }
 }
 
@@ -110,6 +105,5 @@ else
             Question = NextQuestion;
         }
 
-        Result = await Http.GetJsonAsync<ResultTO>(@"Result\" + questionId + @"\" + answerId);
     }
 }

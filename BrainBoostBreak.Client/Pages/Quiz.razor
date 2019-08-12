@@ -73,14 +73,12 @@ else
     [Parameter]
     public int AnswerId { get; set; }
 
-<<<<<<< HEAD
     private void Speak(string text)
     {
         JsRuntime.InvokeAsync<object>("speak", text);
     }
-=======
+
     int SelectedAnswerId { get; set; }
->>>>>>> ff24bb6
 
     protected override async Task OnInitAsync()
     {
@@ -91,7 +89,6 @@ else
 
     public async Task GetNext(int questionId, int answerId)
     {
-<<<<<<< HEAD
         if (answerId == Question.CorrectAnswerId)
         {
             Result = new ResultTO() { Correct = true, Text = "Richtig" };
@@ -100,9 +97,9 @@ else
         {
             Result = new ResultTO() { Correct = false, Text = "Falsch" };
         }
-=======
+
         SelectedAnswerId = answerId;
->>>>>>> ff24bb6
+
 
         Question = NextQuestion;
 
@@ -110,19 +107,9 @@ else
 
         if (Question == null)
         {
-<<<<<<< HEAD
-            NextQuestion = q.Result;
-            if (Question == null)
-            {
-                Question = NextQuestion;
-            }
-        });
-=======
             Question = NextQuestion;
         }
 
         Result = await Http.GetJsonAsync<ResultTO>(@"Result\" + questionId + @"\" + answerId);
-
->>>>>>> ff24bb6
     }
 }

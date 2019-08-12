@@ -10,6 +10,15 @@ app {
     flex-direction: column;
 }
 
+.gradient {
+    background-image: linear-gradient(to bottom right, #3399ff, #3366ff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50px;
+    color: #FFFFFF;
+}
+
 .top-row {
     height: 3.5rem;
     display: flex;

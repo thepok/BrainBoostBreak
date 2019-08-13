@@ -1,0 +1,46 @@
+﻿@page "/topics"
+@using BrainBoostBreak.Shared
+@inject HttpClient Http
+@inject IJSRuntime JsRuntime;
+
+<h3>Topics!</h3>
+
+@if (TopicsTO != null)
+{
+    @foreach (var topic in TopicsTO.Topics)
+    {
+        <ul>
+            <li>
+                @topic.Name 
+            @topic.Description
+                </li>
+        </ul>
+    }
+}
+@code {
+
+    TopicsTO _topics;
+
+    TopicsTO TopicsTO
+    {
+        get
+        {
+            return _topics;
+        }
+        set
+        {
+            _topics = value;
+            StateHasChanged();
+        }
+    }
+
+
+    protected override async Task OnInitAsync()
+    {
+                Console.WriteLine("Done1");
+                Console.WriteLine("Done2");
+                Console.WriteLine("Done3");
+        TopicsTO = await Http.GetJsonAsync<TopicsTO>("api/topics");
+        Console.WriteLine("DoneMMMMMMMMMMMMMMMMMM" + TopicsTO.Topics.Count());
+    }
+}

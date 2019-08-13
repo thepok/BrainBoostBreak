@@ -4,19 +4,19 @@ using System.Text;
 
 namespace BrainBoostBreak.Shared
 {
-    class TopicsTO
+    public class TopicsTO
     {
-        TopicTO[] Topics;
+        public TopicTO[] Topics { get; set; }
     }
 
-    class TopicTO
+    public class TopicTO
     {
-        int Id { get; set; }
+        public int Id { get; set; }
 
-        string Name { get; set; }
+        public string Name { get; set; }
 
-        string Description { get; set; }
+        public string Description { get; set; }
 
-        bool Enabled { get; set; }
+        public bool Enabled { get; set; }
     }
 }

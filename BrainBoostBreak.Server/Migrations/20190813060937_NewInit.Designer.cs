@@ -9,8 +9,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BrainBoostBreak.Server.Migrations
 {
     [DbContext(typeof(QuestionDatabase))]
-    [Migration("20190812074152_AddTopicToAnswers")]
-    partial class AddTopicToAnswers
+    [Migration("20190813060937_NewInit")]
+    partial class NewInit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -534,6 +534,9 @@ namespace BrainBoostBreak.Server.Migrations
                     b.Property<int>("TopicId")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Name")
+                        .IsRequired();
+
                     b.HasKey("TopicId");
 
                     b.ToTable("Topics");
@@ -541,11 +544,13 @@ namespace BrainBoostBreak.Server.Migrations
                     b.HasData(
                         new
                         {
-                            TopicId = -1
+                            TopicId = -1,
+                            Name = "Zitate"
                         },
                         new
                         {
-                            TopicId = -2
+                            TopicId = -2,
+                            Name = "Buchstaben lernen"
                         });
                 });
 

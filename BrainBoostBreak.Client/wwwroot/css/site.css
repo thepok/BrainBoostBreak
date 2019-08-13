@@ -19,6 +19,14 @@ app {
     color: #FFFFFF;
 }
 
+.selected {
+    background-image: linear-gradient(to bottom right, #ff3300, #cc0000);
+}
+
+.success {
+    background-image: linear-gradient(to bottom right, #00cc00, #009933);
+}
+
 .top-row {
     height: 3.5rem;
     display: flex;

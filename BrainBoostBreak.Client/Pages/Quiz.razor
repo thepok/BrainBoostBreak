@@ -2,19 +2,9 @@
 @page "/"
 @using BrainBoostBreak.Shared
 @inject HttpClient Http
-@inject IJSRuntime JsRuntime;
+@inject IJSRuntime JsRuntime
+@inject BBBModel BBB
 
-
-@if (Result != null)
-{
-    <h1>Letze Frage:</h1>
-
-    @Result.Text
-
-}
-<br />
-
-<h1>Nächste Frage</h1>
 
 @if (Question == null)
 {
@@ -81,6 +71,8 @@ else
 
     private void Speak(string text)
     {
+        if (BBB.UseVoiceSystem == false)
+            return;
         JsRuntime.InvokeAsync<object>("speak", text);
     }
 

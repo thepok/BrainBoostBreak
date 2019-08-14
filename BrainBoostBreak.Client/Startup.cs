@@ -7,6 +7,7 @@ namespace BrainBoostBreak.Client
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<BBBModel>(new BBBModel());
         }
 
         public void Configure(IComponentsApplicationBuilder app)

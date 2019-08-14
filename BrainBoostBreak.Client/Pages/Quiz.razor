@@ -80,11 +80,23 @@ else
 
     int SelectedAnswerId { get; set; }
 
+    Task<QuestionTO> GetQuestionFromServer()
+    {
+
+        var enabledTopics = BBB.Topics.Where(t => t.Enabled).ToArray();
+
+        return Http.GetJsonAsync<QuestionTO>("Question/" + enabledTopics[BBB.Rnd.Next(enabledTopics.Length)].Id);
+    }
+
     protected override async Task OnInitializedAsync()
     {
-        Question = await Http.GetJsonAsync<QuestionTO>("Question");
+        if(BBB.Topics.Length==0)
+        {
+            BBB.Topics = (await Http.GetJsonAsync<TopicsTO>("api/topics")).Topics;
+        }
+        Question = await GetQuestionFromServer();
 
-        NextQuestion = await Http.GetJsonAsync<QuestionTO>("Question");
+        NextQuestion = await GetQuestionFromServer();
     }
 
     public async Task GetNext(int questionId, int answerId)
@@ -110,7 +122,7 @@ else
 
         Question = NextQuestion;
 
-        NextQuestion = await Http. GetJsonAsync<QuestionTO>("Question");
+        NextQuestion = await GetQuestionFromServer();
 
         if (Question == null)
         {

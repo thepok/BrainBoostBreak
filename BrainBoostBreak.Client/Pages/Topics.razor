@@ -7,12 +7,13 @@
 
 @if (TopicsTO != null)
 {
-    @foreach (var topic in TopicsTO.Topics)
+    @foreach (var topic in BBB.Topics)
     {
         <ul>
             <li>
                 @topic.Name 
-            @topic.Description
+                @topic.Description 
+                <input type="checkbox" @bind="@topic.Enabled" />
                 </li>
         </ul>
     }

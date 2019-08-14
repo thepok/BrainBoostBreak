@@ -80,7 +80,7 @@ else
 
     int SelectedAnswerId { get; set; }
 
-    protected override async Task OnInitAsync()
+    protected override async Task OnInitializedAsync()
     {
         Question = await Http.GetJsonAsync<QuestionTO>("Question");
 
@@ -110,7 +110,7 @@ else
 
         Question = NextQuestion;
 
-        NextQuestion = await Http.GetJsonAsync<QuestionTO>("Question");
+        NextQuestion = await Http. GetJsonAsync<QuestionTO>("Question");
 
         if (Question == null)
         {

@@ -1,8 +1,8 @@
 ﻿@page "/topics"
 @using BrainBoostBreak.Shared
 @inject HttpClient Http
-@inject IJSRuntime JsRuntime;
-
+@inject IJSRuntime JsRuntime
+@inject BBBModel BBB
 <h3>Topics!</h3>
 
 @if (TopicsTO != null)
@@ -35,12 +35,9 @@
     }
 
 
-    protected override async Task OnInitAsync()
+    protected override async Task OnInitializedAsync()
     {
-                Console.WriteLine("Done1");
-                Console.WriteLine("Done2");
-                Console.WriteLine("Done3");
         TopicsTO = await Http.GetJsonAsync<TopicsTO>("api/topics");
-        Console.WriteLine("DoneMMMMMMMMMMMMMMMMMM" + TopicsTO.Topics.Count());
+
     }
 }

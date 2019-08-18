@@ -13,26 +13,40 @@
 else
 {
     @Question.Text
-    <br />
-    <br />
-    foreach (var answer in Question.Answers)
+
+    if(BBB.UseVoiceSystem)
     {
-        @if (Answered && answer.Id == Question.CorrectAnswerId)
+        <div class="selected" @onclick="@(()=>Repeat())">Wiederholen</div>
+    }
+    <br />
+    <br />
+    @foreach (var answer in Question.Answers)
+    {
+        @if (Answered && answer.Text == Question.CorrectAnswer.Text)
         {
-            <div class="question success" @onclick="@(()=>GetNext(Question.Id, answer.Id))">@answer.Text</div>
+            <div class="question success" @onclick="@(()=>GetNext(Question.Id, answer))">@answer.Text</div>
         }
         else if (Answered && answer.Id == SelectedAnswerId)
         {
-            <div class="question selected" @onclick="@(() => GetNext(Question.Id, answer.Id))">@answer.Text</div>
+            <div class="question selected" @onclick="@(() => GetNext(Question.Id, answer))">@answer.Text</div>
         }
         else
         {
-            <div class="question" @onclick="@(()=>GetNext(Question.Id, answer.Id))">@answer.Text</div>
+            <div class="question" @onclick="@(()=>GetNext(Question.Id, answer))">@answer.Text</div>
         }
     }
 }
+<br />
+@rightAnswers
+<br>
+    @for(int i=0; i<rightAnswers; i++)
+    {
+       <bold>x</bold>
+    }
 
 @code {
+
+    int rightAnswers = 0;
 
     QuestionTO _question;
     QuestionTO Question
@@ -45,7 +59,7 @@ else
         {
             _question = value;
             StateHasChanged();
-            Speak(Question.Text);
+            Speak(Question.VoiceText);
         }
     }
 
@@ -99,20 +113,31 @@ else
         NextQuestion = await GetQuestionFromServer();
     }
 
-    public async Task GetNext(int questionId, int answerId)
+    public async Task Repeat()
     {
+        Speak(Question.VoiceText);
+    }
+
+    public async Task GetNext(int questionId, AnswerTO answer)
+    {
+        if(Answered)
+        {
+            return;
+        }
         Answered = true;
 
-        if (answerId == Question.CorrectAnswerId)
+        if (answer.Id == Question.CorrectAnswer.Id || answer.Text==Question.CorrectAnswer.Text)
         {
             Result = new ResultTO() { Correct = true, Text = "Richtig" };
+            rightAnswers++;
         }
         else
         {
             Result = new ResultTO() { Correct = false, Text = "Falsch" };
+            rightAnswers--;
         }
 
-        SelectedAnswerId = answerId;
+        SelectedAnswerId = answer.Id;
 
         StateHasChanged();
 

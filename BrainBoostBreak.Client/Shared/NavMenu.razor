@@ -1,4 +1,6 @@
-﻿<div class="top-row pl-4 navbar navbar-dark">
+﻿@inject BBBModel BBB
+
+<div class="top-row pl-4 navbar navbar-dark">
     <a class="navbar-brand" href="">BrainBoostBreak</a>
     <button class="navbar-toggler" @onclick="ToggleNavMenu">
         <span class="navbar-toggler-icon"></span>
@@ -23,6 +25,7 @@
             </NavLink>
         </li>
     </ul>
+    <div style="color:white"> @BBB.Player Sprachausgabe - <input type="checkbox" @bind="@BBB.UseVoiceSystem" /></div>
 </div>
 
 @code {

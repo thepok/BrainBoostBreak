@@ -28,6 +28,8 @@ namespace BrainBoostBreak.Server
             //Use negative PrimaryKeys to avoid conflicts with Database Sequenze generated Keys
             QuestionsQuote.InitData(modelBuilder);
             UpperAndLowercaseLetters.InitData(modelBuilder);
+            UpperAndLowercaseLetters.InitDataMamaPapa(modelBuilder);
+            EasyMath.InitData(modelBuilder);
 
             base.OnModelCreating(modelBuilder);
         }
@@ -76,6 +78,8 @@ namespace BrainBoostBreak.Server
 
         [Required]
         public string Text { get; set; }
+
+        public string VoiceText { get; set; }
 
         public int AnswerId { get; set; }
 

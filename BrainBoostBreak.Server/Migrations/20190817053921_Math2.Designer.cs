@@ -9,8 +9,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BrainBoostBreak.Server.Migrations
 {
     [DbContext(typeof(QuestionDatabase))]
-    [Migration("20190814123635_newquestions")]
-    partial class newquestions
+    [Migration("20190817053921_Math2")]
+    partial class Math2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -394,6 +394,240 @@ namespace BrainBoostBreak.Server.Migrations
                             AnswerId = 59,
                             Text = "ö",
                             TopicId = -2
+                        },
+                        new
+                        {
+                            AnswerId = 60,
+                            Text = "M",
+                            TopicId = -3
+                        },
+                        new
+                        {
+                            AnswerId = 61,
+                            Text = "a",
+                            TopicId = -3
+                        },
+                        new
+                        {
+                            AnswerId = 62,
+                            Text = "Ma",
+                            TopicId = -3
+                        },
+                        new
+                        {
+                            AnswerId = 63,
+                            Text = "Mama",
+                            TopicId = -3
+                        },
+                        new
+                        {
+                            AnswerId = 64,
+                            Text = "P",
+                            TopicId = -3
+                        },
+                        new
+                        {
+                            AnswerId = 65,
+                            Text = "Pa",
+                            TopicId = -3
+                        },
+                        new
+                        {
+                            AnswerId = 66,
+                            Text = "Papa",
+                            TopicId = -3
+                        },
+                        new
+                        {
+                            AnswerId = 67,
+                            Text = "i",
+                            TopicId = -3
+                        },
+                        new
+                        {
+                            AnswerId = 68,
+                            Text = "pi",
+                            TopicId = -3
+                        },
+                        new
+                        {
+                            AnswerId = 69,
+                            Text = "mi",
+                            TopicId = -3
+                        },
+                        new
+                        {
+                            AnswerId = 70,
+                            Text = "Papi",
+                            TopicId = -3
+                        },
+                        new
+                        {
+                            AnswerId = 71,
+                            Text = "Mami",
+                            TopicId = -3
+                        },
+                        new
+                        {
+                            AnswerId = 72,
+                            Text = "Mam",
+                            TopicId = -3
+                        },
+                        new
+                        {
+                            AnswerId = 73,
+                            Text = "M",
+                            TopicId = -4
+                        },
+                        new
+                        {
+                            AnswerId = 74,
+                            Text = "a",
+                            TopicId = -4
+                        },
+                        new
+                        {
+                            AnswerId = 75,
+                            Text = "Ma",
+                            TopicId = -4
+                        },
+                        new
+                        {
+                            AnswerId = 76,
+                            Text = "Mama",
+                            TopicId = -4
+                        },
+                        new
+                        {
+                            AnswerId = 77,
+                            Text = "P",
+                            TopicId = -4
+                        },
+                        new
+                        {
+                            AnswerId = 78,
+                            Text = "Pa",
+                            TopicId = -4
+                        },
+                        new
+                        {
+                            AnswerId = 79,
+                            Text = "Papa",
+                            TopicId = -4
+                        },
+                        new
+                        {
+                            AnswerId = 80,
+                            Text = "i",
+                            TopicId = -4
+                        },
+                        new
+                        {
+                            AnswerId = 81,
+                            Text = "pi",
+                            TopicId = -4
+                        },
+                        new
+                        {
+                            AnswerId = 82,
+                            Text = "mi",
+                            TopicId = -4
+                        },
+                        new
+                        {
+                            AnswerId = 83,
+                            Text = "Papi",
+                            TopicId = -4
+                        },
+                        new
+                        {
+                            AnswerId = 84,
+                            Text = "Mami",
+                            TopicId = -4
+                        },
+                        new
+                        {
+                            AnswerId = 85,
+                            Text = "Mam",
+                            TopicId = -4
+                        },
+                        new
+                        {
+                            AnswerId = 86,
+                            Text = "2",
+                            TopicId = -5
+                        },
+                        new
+                        {
+                            AnswerId = 87,
+                            Text = "3",
+                            TopicId = -5
+                        },
+                        new
+                        {
+                            AnswerId = 88,
+                            Text = "3",
+                            TopicId = -5
+                        },
+                        new
+                        {
+                            AnswerId = 89,
+                            Text = "5",
+                            TopicId = -5
+                        },
+                        new
+                        {
+                            AnswerId = 90,
+                            Text = "5",
+                            TopicId = -5
+                        },
+                        new
+                        {
+                            AnswerId = 91,
+                            Text = "3",
+                            TopicId = -5
+                        },
+                        new
+                        {
+                            AnswerId = 92,
+                            Text = "4",
+                            TopicId = -5
+                        },
+                        new
+                        {
+                            AnswerId = 93,
+                            Text = "4",
+                            TopicId = -5
+                        },
+                        new
+                        {
+                            AnswerId = 94,
+                            Text = "4",
+                            TopicId = -5
+                        },
+                        new
+                        {
+                            AnswerId = 95,
+                            Text = "5",
+                            TopicId = -5
+                        },
+                        new
+                        {
+                            AnswerId = 96,
+                            Text = "5",
+                            TopicId = -5
+                        },
+                        new
+                        {
+                            AnswerId = 97,
+                            Text = "5",
+                            TopicId = -5
+                        },
+                        new
+                        {
+                            AnswerId = 98,
+                            Text = "6",
+                            TopicId = -5
                         });
                 });
 
@@ -409,6 +643,8 @@ namespace BrainBoostBreak.Server.Migrations
 
                     b.Property<int>("TopicId");
 
+                    b.Property<string>("VoiceText");
+
                     b.HasKey("QuestionId");
 
                     b.HasIndex("AnswerId");
@@ -423,238 +659,584 @@ namespace BrainBoostBreak.Server.Migrations
                             QuestionId = 1,
                             AnswerId = 1,
                             Text = "Wem wird folgendes Zitat zugeschrieben: 'Wer glaubt, etwas zu sein, hat aufgehört, etwas zu werden.'",
-                            TopicId = -1
+                            TopicId = -1,
+                            VoiceText = "Wem wird folgendes Zitat zugeschrieben: 'Wer glaubt, etwas zu sein, hat aufgehört, etwas zu werden.'"
                         },
                         new
                         {
                             QuestionId = 2,
                             AnswerId = 7,
                             Text = "Wem wird folgendes Zitat zugeschrieben: 'Gewalt ist die Waffe des Schwachen.'",
-                            TopicId = -1
+                            TopicId = -1,
+                            VoiceText = "Wem wird folgendes Zitat zugeschrieben: 'Gewalt ist die Waffe des Schwachen.'"
                         },
                         new
                         {
                             QuestionId = 3,
                             AnswerId = 13,
                             Text = "Wem wird folgendes Zitat zugeschrieben: 'Das Geld, das man besitzt, ist das Mittel zur Freiheit, dasjenige, dem man nachjagt, das Mittel zur Knechtschaft.'",
-                            TopicId = -1
+                            TopicId = -1,
+                            VoiceText = "Wem wird folgendes Zitat zugeschrieben: 'Das Geld, das man besitzt, ist das Mittel zur Freiheit, dasjenige, dem man nachjagt, das Mittel zur Knechtschaft.'"
                         },
                         new
                         {
                             QuestionId = 4,
                             AnswerId = 19,
                             Text = "Wem wird folgendes Zitat zugeschrieben: 'Wir sind, was wir denken. Alles, was wir sind, entsteht aus unseren Gedanken. Mit unseren Gedanken formen wir die Welt.'",
-                            TopicId = -1
+                            TopicId = -1,
+                            VoiceText = "Wem wird folgendes Zitat zugeschrieben: 'Wir sind, was wir denken. Alles, was wir sind, entsteht aus unseren Gedanken. Mit unseren Gedanken formen wir die Welt.'"
                         },
                         new
                         {
                             QuestionId = 5,
                             AnswerId = 25,
                             Text = "Wem wird folgendes Zitat zugeschrieben: 'Gegen eine Dummheit, die gerade in Mode ist, kommt keine Klugheit auf.'",
-                            TopicId = -1
+                            TopicId = -1,
+                            VoiceText = "Wem wird folgendes Zitat zugeschrieben: 'Gegen eine Dummheit, die gerade in Mode ist, kommt keine Klugheit auf.'"
                         },
                         new
                         {
                             QuestionId = 6,
                             AnswerId = 31,
                             Text = "A",
-                            TopicId = -2
+                            TopicId = -2,
+                            VoiceText = "A"
                         },
                         new
                         {
                             QuestionId = 7,
                             AnswerId = 32,
                             Text = "B",
-                            TopicId = -2
+                            TopicId = -2,
+                            VoiceText = "B"
                         },
                         new
                         {
                             QuestionId = 8,
                             AnswerId = 33,
                             Text = "C",
-                            TopicId = -2
+                            TopicId = -2,
+                            VoiceText = "C"
                         },
                         new
                         {
                             QuestionId = 9,
                             AnswerId = 34,
                             Text = "D",
-                            TopicId = -2
+                            TopicId = -2,
+                            VoiceText = "D"
                         },
                         new
                         {
                             QuestionId = 10,
                             AnswerId = 35,
                             Text = "E",
-                            TopicId = -2
+                            TopicId = -2,
+                            VoiceText = "E"
                         },
                         new
                         {
                             QuestionId = 11,
                             AnswerId = 36,
                             Text = "F",
-                            TopicId = -2
+                            TopicId = -2,
+                            VoiceText = "F"
                         },
                         new
                         {
                             QuestionId = 12,
                             AnswerId = 37,
                             Text = "G",
-                            TopicId = -2
+                            TopicId = -2,
+                            VoiceText = "G"
                         },
                         new
                         {
                             QuestionId = 13,
                             AnswerId = 38,
                             Text = "H",
-                            TopicId = -2
+                            TopicId = -2,
+                            VoiceText = "H"
                         },
                         new
                         {
                             QuestionId = 14,
                             AnswerId = 39,
                             Text = "I",
-                            TopicId = -2
+                            TopicId = -2,
+                            VoiceText = "I"
                         },
                         new
                         {
                             QuestionId = 15,
                             AnswerId = 40,
                             Text = "J",
-                            TopicId = -2
+                            TopicId = -2,
+                            VoiceText = "J"
                         },
                         new
                         {
                             QuestionId = 16,
                             AnswerId = 41,
                             Text = "K",
-                            TopicId = -2
+                            TopicId = -2,
+                            VoiceText = "K"
                         },
                         new
                         {
                             QuestionId = 17,
                             AnswerId = 42,
                             Text = "L",
-                            TopicId = -2
+                            TopicId = -2,
+                            VoiceText = "L"
                         },
                         new
                         {
                             QuestionId = 18,
                             AnswerId = 43,
                             Text = "M",
-                            TopicId = -2
+                            TopicId = -2,
+                            VoiceText = "M"
                         },
                         new
                         {
                             QuestionId = 19,
                             AnswerId = 44,
                             Text = "N",
-                            TopicId = -2
+                            TopicId = -2,
+                            VoiceText = "N"
                         },
                         new
                         {
                             QuestionId = 20,
                             AnswerId = 45,
                             Text = "O",
-                            TopicId = -2
+                            TopicId = -2,
+                            VoiceText = "O"
                         },
                         new
                         {
                             QuestionId = 21,
                             AnswerId = 46,
                             Text = "P",
-                            TopicId = -2
+                            TopicId = -2,
+                            VoiceText = "P"
                         },
                         new
                         {
                             QuestionId = 22,
                             AnswerId = 47,
                             Text = "Q",
-                            TopicId = -2
+                            TopicId = -2,
+                            VoiceText = "Q"
                         },
                         new
                         {
                             QuestionId = 23,
                             AnswerId = 48,
                             Text = "R",
-                            TopicId = -2
+                            TopicId = -2,
+                            VoiceText = "R"
                         },
                         new
                         {
                             QuestionId = 24,
                             AnswerId = 49,
                             Text = "S",
-                            TopicId = -2
+                            TopicId = -2,
+                            VoiceText = "S"
                         },
                         new
                         {
                             QuestionId = 25,
                             AnswerId = 50,
                             Text = "T",
-                            TopicId = -2
+                            TopicId = -2,
+                            VoiceText = "T"
                         },
                         new
                         {
                             QuestionId = 26,
                             AnswerId = 51,
                             Text = "U",
-                            TopicId = -2
+                            TopicId = -2,
+                            VoiceText = "U"
                         },
                         new
                         {
                             QuestionId = 27,
                             AnswerId = 52,
                             Text = "V",
-                            TopicId = -2
+                            TopicId = -2,
+                            VoiceText = "V"
                         },
                         new
                         {
                             QuestionId = 28,
                             AnswerId = 53,
                             Text = "W",
-                            TopicId = -2
+                            TopicId = -2,
+                            VoiceText = "W"
                         },
                         new
                         {
                             QuestionId = 29,
                             AnswerId = 54,
                             Text = "X",
-                            TopicId = -2
+                            TopicId = -2,
+                            VoiceText = "X"
                         },
                         new
                         {
                             QuestionId = 30,
                             AnswerId = 55,
                             Text = "Y",
-                            TopicId = -2
+                            TopicId = -2,
+                            VoiceText = "Y"
                         },
                         new
                         {
                             QuestionId = 31,
                             AnswerId = 56,
                             Text = "Z",
-                            TopicId = -2
+                            TopicId = -2,
+                            VoiceText = "Z"
                         },
                         new
                         {
                             QuestionId = 32,
                             AnswerId = 57,
                             Text = "Ä",
-                            TopicId = -2
+                            TopicId = -2,
+                            VoiceText = "Ä"
                         },
                         new
                         {
                             QuestionId = 33,
                             AnswerId = 58,
                             Text = "Ü",
-                            TopicId = -2
+                            TopicId = -2,
+                            VoiceText = "Ü"
                         },
                         new
                         {
                             QuestionId = 34,
                             AnswerId = 59,
                             Text = "Ö",
-                            TopicId = -2
+                            TopicId = -2,
+                            VoiceText = "Ö"
+                        },
+                        new
+                        {
+                            QuestionId = 35,
+                            AnswerId = 60,
+                            Text = "M",
+                            TopicId = -3,
+                            VoiceText = "M"
+                        },
+                        new
+                        {
+                            QuestionId = 36,
+                            AnswerId = 61,
+                            Text = "a",
+                            TopicId = -3,
+                            VoiceText = "a"
+                        },
+                        new
+                        {
+                            QuestionId = 37,
+                            AnswerId = 62,
+                            Text = "Ma",
+                            TopicId = -3,
+                            VoiceText = "Ma"
+                        },
+                        new
+                        {
+                            QuestionId = 38,
+                            AnswerId = 63,
+                            Text = "Mama",
+                            TopicId = -3,
+                            VoiceText = "Mama"
+                        },
+                        new
+                        {
+                            QuestionId = 39,
+                            AnswerId = 64,
+                            Text = "P",
+                            TopicId = -3,
+                            VoiceText = "P"
+                        },
+                        new
+                        {
+                            QuestionId = 40,
+                            AnswerId = 65,
+                            Text = "Pa",
+                            TopicId = -3,
+                            VoiceText = "Pa"
+                        },
+                        new
+                        {
+                            QuestionId = 41,
+                            AnswerId = 66,
+                            Text = "Papa",
+                            TopicId = -3,
+                            VoiceText = "Papa"
+                        },
+                        new
+                        {
+                            QuestionId = 42,
+                            AnswerId = 67,
+                            Text = "i",
+                            TopicId = -3,
+                            VoiceText = "i"
+                        },
+                        new
+                        {
+                            QuestionId = 43,
+                            AnswerId = 68,
+                            Text = "pi",
+                            TopicId = -3,
+                            VoiceText = "pi"
+                        },
+                        new
+                        {
+                            QuestionId = 44,
+                            AnswerId = 69,
+                            Text = "mi",
+                            TopicId = -3,
+                            VoiceText = "mi"
+                        },
+                        new
+                        {
+                            QuestionId = 45,
+                            AnswerId = 70,
+                            Text = "Papi",
+                            TopicId = -3,
+                            VoiceText = "Papi"
+                        },
+                        new
+                        {
+                            QuestionId = 46,
+                            AnswerId = 71,
+                            Text = "Mami",
+                            TopicId = -3,
+                            VoiceText = "Mami"
+                        },
+                        new
+                        {
+                            QuestionId = 47,
+                            AnswerId = 72,
+                            Text = "Mam",
+                            TopicId = -3,
+                            VoiceText = "Mam"
+                        },
+                        new
+                        {
+                            QuestionId = 48,
+                            AnswerId = 73,
+                            Text = "",
+                            TopicId = -4,
+                            VoiceText = "M"
+                        },
+                        new
+                        {
+                            QuestionId = 49,
+                            AnswerId = 74,
+                            Text = "",
+                            TopicId = -4,
+                            VoiceText = "a"
+                        },
+                        new
+                        {
+                            QuestionId = 50,
+                            AnswerId = 75,
+                            Text = "",
+                            TopicId = -4,
+                            VoiceText = "Ma"
+                        },
+                        new
+                        {
+                            QuestionId = 51,
+                            AnswerId = 76,
+                            Text = "",
+                            TopicId = -4,
+                            VoiceText = "Mama"
+                        },
+                        new
+                        {
+                            QuestionId = 52,
+                            AnswerId = 77,
+                            Text = "",
+                            TopicId = -4,
+                            VoiceText = "P"
+                        },
+                        new
+                        {
+                            QuestionId = 53,
+                            AnswerId = 78,
+                            Text = "",
+                            TopicId = -4,
+                            VoiceText = "Pa"
+                        },
+                        new
+                        {
+                            QuestionId = 54,
+                            AnswerId = 79,
+                            Text = "",
+                            TopicId = -4,
+                            VoiceText = "Papa"
+                        },
+                        new
+                        {
+                            QuestionId = 55,
+                            AnswerId = 80,
+                            Text = "",
+                            TopicId = -4,
+                            VoiceText = "i"
+                        },
+                        new
+                        {
+                            QuestionId = 56,
+                            AnswerId = 81,
+                            Text = "",
+                            TopicId = -4,
+                            VoiceText = "pi"
+                        },
+                        new
+                        {
+                            QuestionId = 57,
+                            AnswerId = 82,
+                            Text = "",
+                            TopicId = -4,
+                            VoiceText = "mi"
+                        },
+                        new
+                        {
+                            QuestionId = 58,
+                            AnswerId = 83,
+                            Text = "",
+                            TopicId = -4,
+                            VoiceText = "Papi"
+                        },
+                        new
+                        {
+                            QuestionId = 59,
+                            AnswerId = 84,
+                            Text = "",
+                            TopicId = -4,
+                            VoiceText = "Mami"
+                        },
+                        new
+                        {
+                            QuestionId = 60,
+                            AnswerId = 85,
+                            Text = "",
+                            TopicId = -4,
+                            VoiceText = "Mam"
+                        },
+                        new
+                        {
+                            QuestionId = 61,
+                            AnswerId = 86,
+                            Text = "1 + 1",
+                            TopicId = -5,
+                            VoiceText = "1 + 1"
+                        },
+                        new
+                        {
+                            QuestionId = 62,
+                            AnswerId = 87,
+                            Text = "1 + 2",
+                            TopicId = -5,
+                            VoiceText = "1 + 2"
+                        },
+                        new
+                        {
+                            QuestionId = 63,
+                            AnswerId = 88,
+                            Text = "2 + 1",
+                            TopicId = -5,
+                            VoiceText = "2 + 1"
+                        },
+                        new
+                        {
+                            QuestionId = 64,
+                            AnswerId = 89,
+                            Text = "2 + 3",
+                            TopicId = -5,
+                            VoiceText = "2 + 3"
+                        },
+                        new
+                        {
+                            QuestionId = 65,
+                            AnswerId = 90,
+                            Text = "3 + 2",
+                            TopicId = -5,
+                            VoiceText = "3 + 2"
+                        },
+                        new
+                        {
+                            QuestionId = 66,
+                            AnswerId = 91,
+                            Text = "1 + 1 + 1",
+                            TopicId = -5,
+                            VoiceText = "1 + 1 + 1"
+                        },
+                        new
+                        {
+                            QuestionId = 67,
+                            AnswerId = 92,
+                            Text = "2 + 1 + 1",
+                            TopicId = -5,
+                            VoiceText = "2 + 1 + 1"
+                        },
+                        new
+                        {
+                            QuestionId = 68,
+                            AnswerId = 93,
+                            Text = "1 + 2 + 1",
+                            TopicId = -5,
+                            VoiceText = "1 + 2 + 1"
+                        },
+                        new
+                        {
+                            QuestionId = 69,
+                            AnswerId = 94,
+                            Text = "1 + 1 + 2",
+                            TopicId = -5,
+                            VoiceText = "1 + 1 + 2"
+                        },
+                        new
+                        {
+                            QuestionId = 70,
+                            AnswerId = 95,
+                            Text = "2 + 2 + 1",
+                            TopicId = -5,
+                            VoiceText = "2 + 2 + 1"
+                        },
+                        new
+                        {
+                            QuestionId = 71,
+                            AnswerId = 96,
+                            Text = "1 + 2 + 2",
+                            TopicId = -5,
+                            VoiceText = "1 + 2 + 2"
+                        },
+                        new
+                        {
+                            QuestionId = 72,
+                            AnswerId = 97,
+                            Text = "2 + 1 + 2",
+                            TopicId = -5,
+                            VoiceText = "2 + 1 + 2"
+                        },
+                        new
+                        {
+                            QuestionId = 73,
+                            AnswerId = 98,
+                            Text = "2 + 2 + 2",
+                            TopicId = -5,
+                            VoiceText = "2 + 2 + 2"
                         });
                 });
 
@@ -680,6 +1262,21 @@ namespace BrainBoostBreak.Server.Migrations
                         {
                             TopicId = -2,
                             Name = "Buchstaben lernen"
+                        },
+                        new
+                        {
+                            TopicId = -3,
+                            Name = "Mama und Papa"
+                        },
+                        new
+                        {
+                            TopicId = -4,
+                            Name = "Mama und Papa ohne Hilfe"
+                        },
+                        new
+                        {
+                            TopicId = -5,
+                            Name = "Einfache Mathe"
                         });
                 });
 

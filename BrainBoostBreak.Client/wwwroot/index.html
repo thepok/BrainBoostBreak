@@ -37,6 +37,7 @@
         function speak(mytext) {
             var utterThis = new SpeechSynthesisUtterance(mytext);
             utterThis.voice = voice;
+            utterThis.rate = 0.8;
             synth.speak(utterThis);
         }
     </script>

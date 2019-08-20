@@ -17,7 +17,11 @@ namespace BrainBoostBreak.Server
                     .AddCommandLine(args)
                     .Build())
                 .UseStartup<Startup>()
-            .ConfigureKestrel(k=>k.ListenAnyIP(55456))
+#if RELEASE
+            .ConfigureKestrel(k=>k.ListenAnyIP(80))
+#elif DEBUG
+            .ConfigureKestrel(k => k.ListenAnyIP(55456))
+#endif
                 .Build();
     }
 }

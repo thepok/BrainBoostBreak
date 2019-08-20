@@ -1,0 +1,1 @@
+﻿$HOME/dotnet/dotnet run -c Release --project ~/repos/BrainBoostBreak/BrainBoostBreak.Server

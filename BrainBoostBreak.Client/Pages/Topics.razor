@@ -1,18 +1,19 @@
 ﻿@page "/topics"
 @using BrainBoostBreak.Shared
 @inject HttpClient Http
-@inject IJSRuntime JsRuntime;
-
+@inject IJSRuntime JsRuntime
+@inject BBBModel BBB
 <h3>Topics!</h3>
 
 @if (TopicsTO != null)
 {
-    @foreach (var topic in TopicsTO.Topics)
+    @foreach (var topic in BBB.Topics)
     {
         <ul>
             <li>
                 @topic.Name 
-            @topic.Description
+                @topic.Description 
+                <input type="checkbox" @bind="@topic.Enabled" />
                 </li>
         </ul>
     }
@@ -35,12 +36,9 @@
     }
 
 
-    protected override async Task OnInitAsync()
+    protected override async Task OnInitializedAsync()
     {
-                Console.WriteLine("Done1");
-                Console.WriteLine("Done2");
-                Console.WriteLine("Done3");
         TopicsTO = await Http.GetJsonAsync<TopicsTO>("api/topics");
-        Console.WriteLine("DoneMMMMMMMMMMMMMMMMMM" + TopicsTO.Topics.Count());
+
     }
 }

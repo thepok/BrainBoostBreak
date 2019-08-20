@@ -19,15 +19,16 @@ namespace BrainBoostBreak.Server.Controllers
             this.logger = logger;
         }
 
-        [HttpGet]
-        public QuestionTO Get()
+        [HttpGet("{TopicId}")]
+        public QuestionTO Get(int TopicId)
         {
 
 #if DEBUG
-            //Delay to Keep design
+            //Simulate Internetlag while developing
             System.Threading.Thread.Sleep(1000);
 #endif
-            return ProcedualQuestionGenerator.GenQuestion();
+            return ProcedualQuestionGenerator.GenQuestion(TopicId);
         }
+
     }
 }

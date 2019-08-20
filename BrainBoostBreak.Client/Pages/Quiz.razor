@@ -2,19 +2,9 @@
 @page "/"
 @using BrainBoostBreak.Shared
 @inject HttpClient Http
-@inject IJSRuntime JsRuntime;
+@inject IJSRuntime JsRuntime
+@inject BBBModel BBB
 
-
-@if (Result != null)
-{
-    <h1>Letze Frage:</h1>
-
-    @Result.Text
-
-}
-<br />
-
-<h1>Nächste Frage</h1>
 
 @if (Question == null)
 {
@@ -23,26 +13,40 @@
 else
 {
     @Question.Text
-    <br />
-    <br />
-    foreach (var answer in Question.Answers)
+
+    if(BBB.UseVoiceSystem)
     {
-        @if (Answered && answer.Id == Question.CorrectAnswerId)
+        <div class="selected" @onclick="@(()=>Repeat())">Wiederholen</div>
+    }
+    <br />
+    <br />
+    @foreach (var answer in Question.Answers)
+    {
+        @if (Answered && answer.Text == Question.CorrectAnswer.Text)
         {
-            <div class="question success" @onclick="@(()=>GetNext(Question.Id, answer.Id))">@answer.Text</div>
+            <div class="question success" @onclick="@(()=>GetNext(Question.Id, answer))">@answer.Text</div>
         }
         else if (Answered && answer.Id == SelectedAnswerId)
         {
-            <div class="question selected" @onclick="@(() => GetNext(Question.Id, answer.Id))">@answer.Text</div>
+            <div class="question selected" @onclick="@(() => GetNext(Question.Id, answer))">@answer.Text</div>
         }
         else
         {
-            <div class="question" @onclick="@(()=>GetNext(Question.Id, answer.Id))">@answer.Text</div>
+            <div class="question" @onclick="@(()=>GetNext(Question.Id, answer))">@answer.Text</div>
         }
     }
 }
+<br />
+@rightAnswers
+<br>
+    @for(int i=0; i<rightAnswers; i++)
+    {
+       <bold>x</bold>
+    }
 
 @code {
+
+    int rightAnswers = 0;
 
     QuestionTO _question;
     QuestionTO Question
@@ -55,7 +59,7 @@ else
         {
             _question = value;
             StateHasChanged();
-            Speak(Question.Text);
+            Speak(Question.VoiceText);
         }
     }
 
@@ -81,6 +85,8 @@ else
 
     private void Speak(string text)
     {
+        if (BBB.UseVoiceSystem == false)
+            return;
         JsRuntime.InvokeAsync<object>("speak", text);
     }
 
@@ -88,27 +94,50 @@ else
 
     int SelectedAnswerId { get; set; }
 
-    protected override async Task OnInitAsync()
+    Task<QuestionTO> GetQuestionFromServer()
     {
-        Question = await Http.GetJsonAsync<QuestionTO>("Question");
 
-        NextQuestion = await Http.GetJsonAsync<QuestionTO>("Question");
+        var enabledTopics = BBB.Topics.Where(t => t.Enabled).ToArray();
+
+        return Http.GetJsonAsync<QuestionTO>("Question/" + enabledTopics[BBB.Rnd.Next(enabledTopics.Length)].Id);
     }
 
-    public async Task GetNext(int questionId, int answerId)
+    protected override async Task OnInitializedAsync()
     {
+        if(BBB.Topics.Length==0)
+        {
+            BBB.Topics = (await Http.GetJsonAsync<TopicsTO>("api/topics")).Topics;
+        }
+        Question = await GetQuestionFromServer();
+
+        NextQuestion = await GetQuestionFromServer();
+    }
+
+    public async Task Repeat()
+    {
+        Speak(Question.VoiceText);
+    }
+
+    public async Task GetNext(int questionId, AnswerTO answer)
+    {
+        if(Answered)
+        {
+            return;
+        }
         Answered = true;
 
-        if (answerId == Question.CorrectAnswerId)
+        if (answer.Id == Question.CorrectAnswer.Id || answer.Text==Question.CorrectAnswer.Text)
         {
             Result = new ResultTO() { Correct = true, Text = "Richtig" };
+            rightAnswers++;
         }
         else
         {
             Result = new ResultTO() { Correct = false, Text = "Falsch" };
+            rightAnswers--;
         }
 
-        SelectedAnswerId = answerId;
+        SelectedAnswerId = answer.Id;
 
         StateHasChanged();
 
@@ -118,7 +147,7 @@ else
 
         Question = NextQuestion;
 
-        NextQuestion = await Http.GetJsonAsync<QuestionTO>("Question");
+        NextQuestion = await GetQuestionFromServer();
 
         if (Question == null)
         {
